@@ -8,6 +8,7 @@ public class EasterEgg {
 	public static void main(String[] args) {
 		EasterEgg output = new EasterEgg();
 		output.startingEgg();
+		output.StephanieEgg();
 		//TODO: Everyone call their methods
 		//TODO: Everyone write java doc for the method.
 
