@@ -6,18 +6,19 @@
 public class EasterEgg {
 
 	public static void main(String[] args) {
-		startingEgg();
+		EasterEgg output = new EasterEgg();
+		output.startingEgg();
 		//TODO: Everyone call their methods
 		//TODO: Everyone write java doc for the method.
 
 	}
 
-	public static void startingEgg() {
+	public void startingEgg() {
 		System.out.println("We Are Soup, Salad, and Breadsticks.");
 		
 	}
 	
-	public static void BryanEgg() {
+	public void BryanEgg() {
 		
 	}
 	
@@ -26,16 +27,16 @@ public class EasterEgg {
 	 * Pre condition: None
 	 * Post Condition: Message Displayed
 	 */
-	public static void StephanieEgg() {
+	public void StephanieEgg() {
 		System.out.println("I'm Stephanie, I'll only eat the breadsticks.");
 		
 	}
 	
-	public static void CassieEgg() {
+	public void CassieEgg() {
 		
 	}
 	
-	public static void CynthiaEgg() {
+	public void CynthiaEgg() {
 		
 	}
 }
