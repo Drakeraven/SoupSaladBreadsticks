@@ -33,6 +33,11 @@ public class EasterEgg {
 		
 	}
 	
+	/**
+	 * This is Cassie's message. 
+	 * Pre condition: None
+	 * Post condition: Message displayed 
+	 */
 	public void CassieEgg() {
 		System.out.println("This is Cassie! if you don't order extra breadsticks to take home, "
 				+ "how are you even living?");
