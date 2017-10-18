@@ -34,7 +34,7 @@ public class EasterEgg {
 	}
 	
 	public void CassieEgg() {
-		System.out.println("This is Cassie, if you don't order extra breadsticks to take home, "
+		System.out.println("This is Cassie! if you don't order extra breadsticks to take home, "
 				+ "how are you even living?");
 	}
 	
