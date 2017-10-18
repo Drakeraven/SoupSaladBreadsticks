@@ -9,6 +9,8 @@ public class EasterEgg {
 		EasterEgg output = new EasterEgg();
 		output.startingEgg();
 		output.StephanieEgg();
+		output.CassieEgg();
+		output.CynthiaEgg();
 		//TODO: Everyone call their methods
 		//TODO: Everyone write java doc for the method.
 
@@ -43,7 +45,14 @@ public class EasterEgg {
 				+ "how are you even living?");
 	}
 	
+	/**
+	 * This is Cynthia's message. 
+	 * Pre condition: None
+	 * Post condition: Message displayed 
+	 */
 	public void CynthiaEgg() {
+		System.out.println ("This is Cynthia...Ya'll can fight over your breadsticks. "
+				 + "It's all about that soup though!");
 		
 	}
 }
