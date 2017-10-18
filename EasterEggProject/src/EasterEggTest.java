@@ -82,7 +82,17 @@ public class EasterEggTest {
 	 */
 	@Test
 	public void testCynthiaEgg() {
-		fail("Not yet implemented");
+		PrintStream OrigOut = System.out;
+		OutputStream os = new ByteArrayOutputStream();
+		PrintStream ps = new PrintStream(os);
+		System.setOut(ps);
+		
+		String separator = System.getProperty("line.separator");
+		testEgg.CynthiaEgg();
+		assertEquals("This is Cynthia...Ya'll can fight over your breadsticks. "
+				 + "It's all about that soup though!" + separator, os.toString());
+		
+		System.setOut(OrigOut);
 	}
 
 }
