@@ -84,8 +84,8 @@ public class EasterEggTest {
 	public void testCynthiaEgg() {
 		PrintStream OrigOut = System.out;
 		OutputStream os = new ByteArrayOutputStream();
-		PrintStream ps = new PrintStream(os);
-		System.setOut(ps);
+		PrintStream prs = new PrintStream(os);
+		System.setOut(prs);
 		
 		String separator = System.getProperty("line.separator");
 		testEgg.CynthiaEgg();
