@@ -39,7 +39,6 @@ public class EasterEggTest {
 		testEgg.startingEgg();
 		assertEquals("We Are Soup, Salad, and Breadsticks." + separator,
 				os.toString());
-		
 		System.setOut(OrigOut);	
 	}
 
