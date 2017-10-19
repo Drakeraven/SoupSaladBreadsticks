@@ -37,7 +37,6 @@ public class EasterEggTest {
 		
 		String separator = System.getProperty("line.separator");
 		testEgg.startingEgg();
-		
 		assertEquals("We Are Soup, Salad, and Breadsticks." + separator,
 				os.toString());
 		
