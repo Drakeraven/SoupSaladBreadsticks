@@ -29,7 +29,18 @@ public class EasterEggTest {
 	 */
 	@Test
 	public void testStartingEgg() {
-		fail("Not yet implemented");
+		
+		PrintStream OrigOut = System.out;
+		OutputStream os = new ByteArrayOutputStream();
+		PrintStream ps = new PrintStream(os);
+		System.setOut(ps);
+		
+		String separator = System.getProperty("line.separator");
+		testEgg.startingEgg();
+		assertEquals("We Are Soup, Salad, and Breadsticks." + separator,
+				os.toString());
+		
+		System.setOut(OrigOut);	
 	}
 
 	/**
@@ -37,7 +48,17 @@ public class EasterEggTest {
 	 */
 	@Test
 	public void testBryanEgg() {
-		fail("Not yet implemented");
+			PrintStream OrigOut = System.out;
+			OutputStream os = new ByteArrayOutputStream();
+			PrintStream ps = new PrintStream(os);
+			System.setOut(ps);
+			
+			String separator = System.getProperty("line.separator");
+			testEgg.BryanEgg();
+			assertEquals("This is Bryan. uh, why y'all leave me with the salad??" + separator,
+					os.toString());
+			
+			System.setOut(OrigOut);	
 	}
 
 	/**
