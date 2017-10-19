@@ -11,9 +11,7 @@ public class EasterEgg {
 		output.StephanieEgg();
 		output.CassieEgg();
 		output.CynthiaEgg();
-		//TODO: Everyone call their methods
-		//TODO: Everyone write java doc for the method.
-
+		output.BryanEgg();
 	}
 
 	public void startingEgg() {
@@ -21,8 +19,13 @@ public class EasterEgg {
 		
 	}
 	
+	/**
+	 * This is Bryan's message.
+	 * Pre condition: None
+	 * Post Condition: Message Displayed
+	 */
 	public void BryanEgg() {
-		
+		System.out.println("This is Bryan. uh, why y'all leave me with the salad??");
 	}
 	
 	/**
