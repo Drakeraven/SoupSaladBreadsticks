@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.EventListener;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -19,7 +20,7 @@ import model.UserData;
 /**
  * GUI Panel displaying the main home page of the DIYGuy App
  * @author Stephanie Day
- *
+ * @version 11/27/2017
  */
 public class SplashPanel extends JPanel {
 
@@ -97,5 +98,6 @@ public class SplashPanel extends JPanel {
 		}
 		
 	}
+
 
 }

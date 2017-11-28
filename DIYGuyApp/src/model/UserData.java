@@ -6,6 +6,7 @@ import java.util.ArrayList;
 /** 
  * A Class to hold a particular User's data.
  * @author Stephanie Day
+ * @version 11/25/2017
  */
 public class UserData {
 	
@@ -45,13 +46,7 @@ public class UserData {
 	public void addProject(String projectName) {
 		PROJECT_LIST.add(projectName);
 	}
-	
-	//TODO change for XML?
-	@Override
-	public String toString() {
-		return NAME;
-	}
-	
+		
 	
 }
 
