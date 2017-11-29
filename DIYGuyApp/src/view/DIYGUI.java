@@ -45,8 +45,9 @@ public class DIYGUI extends JFrame {
 		setSize(FRAME_SIZE);
 		setLocationRelativeTo(null);
 		
-		setVisible(true);
+		
 		setupGui();
+		setVisible(true);
 	}
 	
 	/**
