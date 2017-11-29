@@ -1,6 +1,11 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
@@ -26,33 +31,48 @@ public class SplashPanel extends JPanel {
 
 	private static final long serialVersionUID = 7186465643558755364L;
 	private static JFileChooser fileChooser;
+	private static final Dimension BUTTON_SIZE = new Dimension(200,100);
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
 	
 	public static UserData myUserData;
 
-	public SplashPanel(UserData theUserData) {
-		
-		myUserData = theUserData;
-		fileChooser = new JFileChooser();
-		
-		this.setSize(WIDTH, HEIGHT);
-		this.setLayout(new BorderLayout());
-		JPanel ButtonHolder = new JPanel();
-		
-		//TODO Create actions for going to the projects and energy tracker windows
-		ButtonHolder.add(new JButton("Projects"));
-		ButtonHolder.add(new JButton("Energy Tracker"));
-		this.add(ButtonHolder, BorderLayout.CENTER);
-		
-		JPanel ExportHolder = new JPanel();
-		ExportHolder.setLayout(new BorderLayout());
-		//TODO Set up the Inport/Export system 
-		ExportHolder.add(new JButton("Inport/Export"), BorderLayout.SOUTH);
-		
-		this.add(ExportHolder, BorderLayout.EAST);
+	public SplashPanel() {
 
+		fileChooser = new JFileChooser();
+		setUpGui();
+			
+	}
+	
+	private void setUpGui() {
+		this.setSize(WIDTH, HEIGHT);
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints constr = new GridBagConstraints();
 		
+		
+		JPanel ButtonHolder = new JPanel(new GridLayout(1,2));
+		((GridLayout)ButtonHolder.getLayout()).setHgap(20);
+		//TODO Create actions for going to the projects and energy tracker windows
+		JButton projectButton = new JButton("Projects");
+		JButton EnergyButton = new JButton("Energy Tracker");
+		projectButton.setPreferredSize(BUTTON_SIZE);
+		EnergyButton.setPreferredSize(BUTTON_SIZE);
+		ButtonHolder.add(projectButton);
+		ButtonHolder.add(EnergyButton);
+		constr.fill = GridBagConstraints.BOTH;
+		constr.gridx = 0;
+		constr.gridy = 0;
+		this.add(ButtonHolder);
+		
+		JButton exportButton = new JButton("Import/Export");
+		constr.fill = GridBagConstraints.HORIZONTAL;
+
+		constr.anchor = GridBagConstraints.PAGE_END; //bottom of space
+		constr.insets = new Insets(10,0,10,0);  //top padding
+		constr.gridx = 0;       //aligned with button 2
+		constr.gridwidth = 2;   //2 columns wide
+		constr.gridy = 1;
+		this.add(exportButton, constr);
 	}
 	
 	private void exportData() {

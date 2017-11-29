@@ -50,7 +50,3 @@ public class UserData {
 	
 }
 
-//TODO get rid of later 
-class Bill {
-	
-}

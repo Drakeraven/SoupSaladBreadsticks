@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -21,11 +22,11 @@ public class DIYGUI extends JFrame {
 	JToolBar diyToolbar;
 	
 	/** A size for the JFrame. */
-    private static final Dimension FRAME_SIZE = new Dimension(400, 300);
+    private static final Dimension FRAME_SIZE = new Dimension(500, 500);
     
 	
 	/** Main Menu Panel - log in, import,export. */
-	//MainMenuPanel mainMenu;
+	SplashPanel mainMenu;
 	//ProjectMenuPanel projectMenu;
 	//ComparePanel compare;
 	//LearnMorePanel learnMore;
@@ -54,7 +55,8 @@ public class DIYGUI extends JFrame {
 	 * Sets up all panels 
 	 */
 	private void setupGui() {
-		
+		mainMenu = new SplashPanel();
+		this.add(mainMenu, BorderLayout.CENTER);
 	}
 	
 	/**
