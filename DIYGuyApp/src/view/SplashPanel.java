@@ -1,26 +1,22 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.util.EventListener;
 
+import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
+import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import model.UserData;
+import model.XmlHandler;
 
 /**
  * GUI Panel displaying the main home page of the DIYGuy App
@@ -30,18 +26,21 @@ import model.UserData;
 public class SplashPanel extends JPanel {
 
 	private static final long serialVersionUID = 7186465643558755364L;
-	private static JFileChooser fileChooser;
 	private static final Dimension BUTTON_SIZE = new Dimension(200,100);
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
 	
-	public static UserData myUserData;
+	public static XmlHandler programData;
 
 	public SplashPanel() {
-
-		fileChooser = new JFileChooser();
+		
 		setUpGui();
+		try {
+			programData = new XmlHandler();
 			
+		} catch (FileNotFoundException ex) {
+			programData = new XmlHandler(newUserDialog());
+		}
 	}
 	
 	private void setUpGui() {
@@ -64,64 +63,52 @@ public class SplashPanel extends JPanel {
 		constr.gridy = 0;
 		constr.anchor = GridBagConstraints.PAGE_START;
 		this.add(ButtonHolder);
-//		
-//		JButton importButton = new JButton("Import");
-//		JButton exportButton = new JButton("Export");
-//		constr.fill = GridBagConstraints.BOTH;
-//		constr.weighty = 1.0;
-//		constr.weightx = 1.0;
-//		constr.gridy = 1;
-//		constr.insets = new Insets(10,0,0,0);  
-//		constr.anchor = GridBagConstraints.PAGE_END;
-//		//this.add(importButton);
-//		//constr.anchor = GridBagConstraints.LAST_LINE_END;
-//		this.add(exportButton);
-		
-
+	
 	}
 	
-	private void exportData() {
-		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		final int selectedFile = fileChooser.showOpenDialog(this);
-		XMLEncoder encoder = null;
+	public JPanel setupImportExportButtons() {
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setAlignmentY(BOTTOM_ALIGNMENT);
+		buttonPanel.add(new JButton("Import User"));
+		buttonPanel.add(new JButton("Export User"));
 		
-		if (selectedFile == JFileChooser.APPROVE_OPTION) {
-			//TODO May be a point of error for where the file is exported
-			final File selectedPath = fileChooser.getCurrentDirectory();
-			try {
-				encoder = new XMLEncoder(new BufferedOutputStream(
-						new FileOutputStream(selectedPath.getAbsolutePath() + "UserData.xml")));
-				
-			} catch(FileNotFoundException fileNotFound) {
-                JOptionPane.showMessageDialog(this,
-                        "Error creating or opening the selected file.", 
-                        "Error!", JOptionPane.ERROR_MESSAGE);
-				
-			}
-			encoder.writeObject(myUserData);
-			encoder.close();
-		}
-		
+		return buttonPanel;
 	}
 	
-	private void importData() {
-		fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-		final int selectedFile = fileChooser.showSaveDialog(this);
-		XMLDecoder decoder = null;
+	private UserData newUserDialog() {
+		UserData newUserProgramData;
+		JTextField enteredName = new JTextField(5);
+		JTextField enteredEmail = new JTextField(5);
 		
-		if (selectedFile == JFileChooser.APPROVE_OPTION) {
-				final File selectedPath = fileChooser.getCurrentDirectory();
-			try{
-				decoder = new XMLDecoder(new BufferedInputStream(
-						new FileInputStream(selectedPath.getAbsolutePath() + ".xml")));
-			} catch (FileNotFoundException ex) {
-				JOptionPane.showMessageDialog(this,
-                        "Error creating or opening the selected file.", 
-                        "Error!", JOptionPane.ERROR_MESSAGE);
+		JPanel fieldPanel = new JPanel(new GridLayout(6,1));
+		fieldPanel.add(new JLabel("Enter a name: "));
+		fieldPanel.add(enteredName);
+		fieldPanel.add(Box.createHorizontalStrut(15));
+		fieldPanel.add(new JLabel("Enter an Email: "));
+		fieldPanel.add(enteredEmail);
+		fieldPanel.add(Box.createHorizontalStrut(15));
+		String validEmail = null;
+		
+			int result = JOptionPane.showConfirmDialog(this, fieldPanel, 
+					"Enter New User Information", JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_OPTION) {
+				validEmail = enteredEmail.getText();
+			} else if (result == JOptionPane.CANCEL_OPTION) {
+				return null; //TODO may change how this is done.
 			}
-			myUserData = (UserData)decoder.readObject(); 
+			//TODO Handle the bug that the program crashes if you exit the user information pane.
+			
+		 while (!validEmail.contains("@")) {
+			JOptionPane.showMessageDialog(null, "Oops! Enter a valid email.");
+			
+			result = JOptionPane.showConfirmDialog(null, fieldPanel, 
+					"Enter New User Information", JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_OPTION) {
+				validEmail = enteredEmail.getText();
+			}
 		}
-		
+		newUserProgramData = new UserData(enteredName.getText(), enteredEmail.getText());
+		return newUserProgramData;
 	}
 
 

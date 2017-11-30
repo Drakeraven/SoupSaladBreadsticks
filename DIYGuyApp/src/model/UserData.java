@@ -15,19 +15,28 @@ public class UserData {
 	
 	public static ArrayList<Bill> BILL_LIST;
 	
-	private static String NAME;
+	private static String userName;
 	
-	private static String PASSWORD;
+	private static String userEmail; 
 	
-	private static String EMAIL; 
-	
-	public UserData() {
+	public UserData(String name, String email) {
 		super();
+		userName = name;
+		userEmail = email;
 		PROJECT_LIST = new ArrayList<String>();
 		BILL_LIST = new ArrayList<Bill>();
 		
 		
 	}
+	
+	public String getName() {
+		return userName;
+	}
+	
+	public String getEmail() {
+		return userEmail;
+	}
+	
 	//TODO this is bad practice stephanie :((
 	public ArrayList<Bill> getBills() {
 		return BILL_LIST;
@@ -45,8 +54,6 @@ public class UserData {
 	
 	public void addProject(String projectName) {
 		PROJECT_LIST.add(projectName);
-	}
-		
-	
+	}	
 }
 

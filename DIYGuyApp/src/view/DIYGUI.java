@@ -57,6 +57,8 @@ public class DIYGUI extends JFrame {
 	private void setupGui() {
 		mainMenu = new SplashPanel();
 		this.add(mainMenu, BorderLayout.CENTER);
+		this.add(mainMenu.setupImportExportButtons(), BorderLayout.SOUTH);
+
 	}
 	
 	/**
