@@ -62,17 +62,22 @@ public class SplashPanel extends JPanel {
 		constr.fill = GridBagConstraints.BOTH;
 		constr.gridx = 0;
 		constr.gridy = 0;
+		constr.anchor = GridBagConstraints.PAGE_START;
 		this.add(ButtonHolder);
+//		
+//		JButton importButton = new JButton("Import");
+//		JButton exportButton = new JButton("Export");
+//		constr.fill = GridBagConstraints.BOTH;
+//		constr.weighty = 1.0;
+//		constr.weightx = 1.0;
+//		constr.gridy = 1;
+//		constr.insets = new Insets(10,0,0,0);  
+//		constr.anchor = GridBagConstraints.PAGE_END;
+//		//this.add(importButton);
+//		//constr.anchor = GridBagConstraints.LAST_LINE_END;
+//		this.add(exportButton);
 		
-		JButton exportButton = new JButton("Import/Export");
-		constr.fill = GridBagConstraints.HORIZONTAL;
 
-		constr.anchor = GridBagConstraints.PAGE_END; //bottom of space
-		constr.insets = new Insets(10,0,10,0);  //top padding
-		constr.gridx = 0;       //aligned with button 2
-		constr.gridwidth = 2;   //2 columns wide
-		constr.gridy = 1;
-		this.add(exportButton, constr);
 	}
 	
 	private void exportData() {
