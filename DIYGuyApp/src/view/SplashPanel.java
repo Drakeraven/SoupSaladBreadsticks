@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
 import javax.swing.Box;
@@ -27,6 +29,8 @@ public class SplashPanel extends JPanel {
 	private static final Dimension BUTTON_SIZE = new Dimension(200,100);
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
+	private static JButton importButton;
+	private static JButton exportButton;
 	
 	public static XmlHandler programData;
 
@@ -67,9 +71,12 @@ public class SplashPanel extends JPanel {
 	public JPanel setupImportExportButtons() {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setAlignmentY(BOTTOM_ALIGNMENT);
-		buttonPanel.add(new JButton("Import User"));
-		buttonPanel.add(new JButton("Export User"));
+		importButton = new JButton("Import user");
+		buttonPanel.add(importButton);
+		exportButton = new JButton("Export User");
+		buttonPanel.add(exportButton);
 		
+		setUpXmlListeners();
 		return buttonPanel;
 	}
 	
@@ -109,5 +116,25 @@ public class SplashPanel extends JPanel {
 		return newUserProgramData;
 	}
 
+	private void setUpXmlListeners() {
+		
+		class xmlListener implements ActionListener {
 
+			@Override
+			public void actionPerformed(ActionEvent theEvent) {
+				
+				if (theEvent.getSource() == importButton) {
+					programData.importData();
+					
+				} else if (theEvent.getSource() == exportButton) {
+					programData.exportData();
+				}
+				
+			}
+			
+		}
+		
+		importButton.addActionListener(new xmlListener());
+		exportButton.addActionListener(new xmlListener());
+	}
 }

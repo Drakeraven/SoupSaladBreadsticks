@@ -28,7 +28,7 @@ public class XmlHandler {
 		myUserData = newUser;
 	}
 	
-	private void exportData() {
+	public void exportData() {
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		final int selectedFile = fileChooser.showOpenDialog(null);
 		XMLEncoder encoder = null;
@@ -52,7 +52,7 @@ public class XmlHandler {
 		
 	}
 	
-	private void importData() {
+	public void importData() {
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		final int selectedFile = fileChooser.showSaveDialog(null);
 		XMLDecoder decoder = null;
