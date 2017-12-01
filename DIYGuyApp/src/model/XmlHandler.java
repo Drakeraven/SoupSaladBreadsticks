@@ -85,5 +85,9 @@ public class XmlHandler {
 		return myProgramData;
 		
 	}
+	
+	public UserData getUserData() {
+		return myUserData;
+	}
 
 }
