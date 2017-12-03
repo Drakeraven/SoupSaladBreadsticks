@@ -60,15 +60,15 @@ public class DIYGUI extends JFrame {
 		this.add(mainMenu, BorderLayout.CENTER);
 		this.add(mainMenu.setupImportExportButtons(), BorderLayout.SOUTH);
 		
-		//projectMenu = new ProjectMenuPanel() ;
+		projectMenu = new ProjectMenuPanel() ;
 		
-		//compare = new ComparePanel() ;
+		compare = new ComparePanel() ;
 		
-		//learnMore = new LearnMorePanel() ;
+		learnMore = new LearnMorePanel() ;
 		
-		//billTracker = new BillTrackerMenuPanel() ;
+		billTracker = new BillTrackerMenuPanel() ;
 		
-		//billEntry = new BillEntryPanel ;
+		billEntry = new BillEntryPanel() ;
 
 	}
 
