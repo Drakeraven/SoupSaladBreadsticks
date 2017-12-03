@@ -3,6 +3,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import model.Bill;
 
 /** 
  * A Class to hold a particular User's data.
@@ -17,13 +18,13 @@ public class UserData implements Serializable {
 	private static final long serialVersionUID = -3542558265070011448L;
 
 	//TODO might not be an array of strings
-	public static ArrayList<String> projectList; 
+	public ArrayList<String> projectList; 
 	
-	public static ArrayList<Bill> billList;
+	public ArrayList<Bill> billList;
 	
-	private static String userName;
+	public String userName;
 	
-	private static String userEmail; 
+	public String userEmail; 
 	
 	public UserData() {
 		
@@ -36,7 +37,6 @@ public class UserData implements Serializable {
 		projectList = new ArrayList<String>();
 		billList = new ArrayList<Bill>();
 		
-		
 	}
 	
 	public String getUserName() {
@@ -47,10 +47,8 @@ public class UserData implements Serializable {
 		return userEmail;
 	}
 	
-	//TODO this is bad practice stephanie :((
-	@SuppressWarnings("unchecked")
 	public ArrayList<Bill> getBillList() {
-		return (ArrayList<Bill>) billList.clone();
+		return billList;
 
 	}
 	

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -24,7 +25,7 @@ import model.FileHandler;
  * @author Stephanie Day
  * @version 11/27/2017
  */
-public class SplashPanel extends JPanel {
+public class SplashPanel extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 7186465643558755364L;
 	private static final Dimension BUTTON_SIZE = new Dimension(200,100);
@@ -38,11 +39,19 @@ public class SplashPanel extends JPanel {
 	public SplashPanel() {
 		
 		setUpGui();
+
 		try {
 			programData = new FileHandler();
 			
 		} catch (FileNotFoundException ex) {
 			programData = new FileHandler(newUserDialog());
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("ERROR: Where's the classes??");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
