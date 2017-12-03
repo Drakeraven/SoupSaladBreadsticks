@@ -1,6 +1,7 @@
 
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /** 
@@ -8,52 +9,62 @@ import java.util.ArrayList;
  * @author Stephanie Day
  * @version 11/25/2017
  */
-public class UserData {
+public class UserData implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3542558265070011448L;
+
 	//TODO might not be an array of strings
-	public static ArrayList<String> PROJECT_LIST; 
+	public static ArrayList<String> projectList; 
 	
-	public static ArrayList<Bill> BILL_LIST;
+	public static ArrayList<Bill> billList;
 	
 	private static String userName;
 	
 	private static String userEmail; 
 	
+	public UserData() {
+		
+	}
+	
 	public UserData(String name, String email) {
 		super();
 		userName = name;
 		userEmail = email;
-		PROJECT_LIST = new ArrayList<String>();
-		BILL_LIST = new ArrayList<Bill>();
+		projectList = new ArrayList<String>();
+		billList = new ArrayList<Bill>();
 		
 		
 	}
 	
-	public String getName() {
+	public String getUserName() {
 		return userName;
 	}
 	
-	public String getEmail() {
+	public String getUserEmail() {
 		return userEmail;
 	}
 	
 	//TODO this is bad practice stephanie :((
-	public ArrayList<Bill> getBills() {
-		return BILL_LIST;
+	@SuppressWarnings("unchecked")
+	public ArrayList<Bill> getBillList() {
+		return (ArrayList<Bill>) billList.clone();
 
 	}
 	
-	public ArrayList<String> getProjectStatus() {
-		return PROJECT_LIST;
+	public ArrayList<String> getProjectList() {
+		return projectList;
 		
 	}
 
-	public void addBill(Bill theBill) {
-		BILL_LIST.add(theBill);
+	public void setBillList(Bill theBill) {
+		billList.add(theBill);
 	}
 	
-	public void addProject(String projectName) {
-		PROJECT_LIST.add(projectName);
+	public void setProjectList(String projectName) {
+		projectList.add(projectName);
 	}	
 }
 
