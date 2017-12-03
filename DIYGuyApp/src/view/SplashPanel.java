@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -16,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.UserData;
-import model.XmlHandler;
+import model.FileHandler;
 
 /**
  * GUI Panel displaying the main home page of the DIYGuy App
@@ -32,16 +33,16 @@ public class SplashPanel extends JPanel {
 	private static JButton importButton;
 	private static JButton exportButton;
 	
-	public static XmlHandler programData;
+	public static FileHandler programData;
 
 	public SplashPanel() {
 		
 		setUpGui();
 		try {
-			programData = new XmlHandler();
+			programData = new FileHandler();
 			
 		} catch (FileNotFoundException ex) {
-			programData = new XmlHandler(newUserDialog());
+			programData = new FileHandler(newUserDialog());
 		}
 	}
 	
@@ -124,10 +125,28 @@ public class SplashPanel extends JPanel {
 			public void actionPerformed(ActionEvent theEvent) {
 				
 				if (theEvent.getSource() == importButton) {
-					programData.importData();
+					try {programData.importData();
+					
+					} catch (ClassNotFoundException FileWahWah) {
+		                JOptionPane.showMessageDialog(null,
+		                        "What Happened to your .exe??", 
+		                        "Error!", JOptionPane.ERROR_MESSAGE);
+		                
+					} catch (IOException fileWahWah) {
+						JOptionPane.showMessageDialog(null,
+		                        "Not a valid format. Be sure you've picked a .diy", 
+		                        "Error!", JOptionPane.ERROR_MESSAGE);
+					}
 					
 				} else if (theEvent.getSource() == exportButton) {
-					programData.exportData();
+					try {
+						programData.exportData();
+					} catch(IOException fileWahWah) {
+		                JOptionPane.showMessageDialog(null,
+		                        "Did you somehow select a bad directory?", 
+		                        "Error!", JOptionPane.ERROR_MESSAGE);
+						
+					}
 				}
 				
 			}
