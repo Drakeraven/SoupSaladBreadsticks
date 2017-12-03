@@ -86,7 +86,9 @@ public class SplashPanel extends JPanel {
 		JTextField enteredName = new JTextField(5);
 		JTextField enteredEmail = new JTextField(5);
 		
-		JPanel fieldPanel = new JPanel(new GridLayout(6,1));
+		JPanel fieldPanel = new JPanel(new GridLayout(8,1));
+		fieldPanel.add(new JLabel("A New User!"));
+		fieldPanel.add(new JLabel("Enter the info below to get started, or cancel to exit."));
 		fieldPanel.add(new JLabel("Enter a name: "));
 		fieldPanel.add(enteredName);
 		fieldPanel.add(Box.createHorizontalStrut(15));
@@ -100,9 +102,11 @@ public class SplashPanel extends JPanel {
 			if (result == JOptionPane.OK_OPTION) {
 				validEmail = enteredEmail.getText();
 			} else if (result == JOptionPane.CANCEL_OPTION) {
-				return null; //TODO may change how this is done.
+				System.exit(0);
+				
+			} else if (result == JOptionPane.CLOSED_OPTION) {
+				System.exit(0);
 			}
-			//TODO Handle the bug that the program crashes if you exit the user information pane.
 			
 		 while (!validEmail.contains("@")) {
 			JOptionPane.showMessageDialog(null, "Oops! Enter a valid email.");
