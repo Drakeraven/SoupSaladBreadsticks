@@ -6,7 +6,7 @@ package view;
 import java.awt.EventQueue;
 
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import de.javasoft.plaf.synthetica.SyntheticaBlackEyeLookAndFeel;
 
 /**
  * This program starts the DIY App
@@ -27,19 +27,22 @@ public final class GuiMain {
      * Set the look and feel for the GUI program.
      */
     private static void setLookAndFeel() {
-        
-        try { 
-            
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-        
-        } catch (final UnsupportedLookAndFeelException e) {
-            System.out.println("UnsupportedLookAndFeelException");
-        } catch (final ClassNotFoundException e) {
-            System.out.println("ClassNotFoundException");
-        } catch (final InstantiationException e) {
-            System.out.println("InstantiationException");
-        } catch (final IllegalAccessException e) {
-            System.out.println("IllegalAccessException");
+        /*
+         * In the Referenced Libraries, all files needed to run Synthetica are stored there
+         * 
+         * Look and Feel credit to JyLoo Software
+         * http://www.jyloo.com/synthetica/themes/
+         * This program is not for commercial use.
+         * 
+         */
+
+        try 
+        {
+          UIManager.setLookAndFeel(new SyntheticaBlackEyeLookAndFeel());
+        } 
+        catch (Exception e) 
+        {
+          e.printStackTrace();
         }
         
     }
