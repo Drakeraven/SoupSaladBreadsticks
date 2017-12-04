@@ -6,6 +6,7 @@ public class ComparePanel extends JPanel{
 
 	/**
 	 * @author Bryan
+	 * A panel for comparing (yes I need to write better documentation)
 	 */
 	private static final long serialVersionUID = 1L;
 	
