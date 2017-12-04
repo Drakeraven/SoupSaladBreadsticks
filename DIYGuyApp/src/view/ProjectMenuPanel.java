@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 public class ProjectMenuPanel extends JPanel{
 
 	/**
-	 * 
+	 * @author Bryan
 	 */
 	private static final long serialVersionUID = 1L;
 	public static final int WIDTH = 500;

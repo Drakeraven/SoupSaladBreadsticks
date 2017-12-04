@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 public class ComparePanel extends JPanel{
 
 	/**
-	 * 
+	 * @author Bryan
 	 */
 	private static final long serialVersionUID = 1L;
 
