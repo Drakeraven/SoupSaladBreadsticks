@@ -7,7 +7,14 @@ import java.io.Serializable;
  * @author Cynthia Mora Olmedo, Editor: Stephanie Day
  *
  */
+<<<<<<< Upstream, based on origin/master
 public final class Bill  implements Serializable {
+=======
+
+public final class Bill implements Serializable {
+
+
+>>>>>>> 1074920 removed duplicate class statement
 	
 	private static final long serialVersionUID = 7675614786195270363L;
 	String billType;
