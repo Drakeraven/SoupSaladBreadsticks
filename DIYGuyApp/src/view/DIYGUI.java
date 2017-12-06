@@ -27,9 +27,9 @@ public class DIYGUI extends JFrame {
 	
 	/** Main Menu Panel - log in, import,export. */
 	SplashPanel mainMenu;
-	//ProjectMenuPanel projectMenu;
-	//ComparePanel compare;
-	//LearnMorePanel learnMore;
+	ProjectMenuPanel projectMenu;
+	ComparePanel compare;
+	LearnMorePanel learnMore;
 	//BillTrackerMenuPanel billTracker;
 	//BillEntryPanel billEntry;
 	
@@ -55,10 +55,8 @@ public class DIYGUI extends JFrame {
 	 * Sets up all panels 
 	 */
 	private void setupGui() {
-		mainMenu = new SplashPanel();
-		this.add(mainMenu, BorderLayout.CENTER);
-		this.add(mainMenu.setupImportExportButtons(), BorderLayout.SOUTH);
-
+		projectMenu = new ProjectMenuPanel();
+		this.add(projectMenu, BorderLayout.CENTER);
 	}
 	
 	/**
