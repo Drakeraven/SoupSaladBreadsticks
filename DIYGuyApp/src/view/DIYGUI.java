@@ -43,9 +43,11 @@ public class DIYGUI extends JFrame {
 	ProjectMenuPanel projectMenu;
 	ComparePanel compare;
 	LearnMorePanel learnMore;
+
 	BillTrackerMenuPanel billTracker;
 	BillEntryPanel billEntry;
 	//FileHandler handler;
+  
 	/**
 	 * Constructor for the DIY GUI frame.
 	 */
@@ -82,6 +84,7 @@ public class DIYGUI extends JFrame {
 	 * Sets up all panels 
 	 */
 	private void setupGui() {
+
 		mainMenu = new SplashPanel();
 		projectMenu = new ProjectMenuPanel() ;
 		compare = new ComparePanel() ;
