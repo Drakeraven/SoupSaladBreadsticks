@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/cynth/Downloads/syntheticaBlackEye_2.9.14/syntheticaBlackEye.jar"/>
-	<classpathentry kind="lib" path="C:/Users/cynth/Downloads/synthetica_2.30.0_eval/synthetica.jar"/>
-	<classpathentry kind="lib" path="C:/Users/cynth/Downloads/synthetica_2.30.0_eval/syntheticaBatik_1.0.0/syntheticaBatik.jar"/>
+	<classpathentry kind="lib" path="C:/Users/steph/git/syntheticaBlackEye.jar"/>
+	<classpathentry kind="lib" path="C:/Users/steph/git/synthetica.jar"/>
+	<classpathentry kind="lib" path="C:/Users/steph/git/syntheticaBatik.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
