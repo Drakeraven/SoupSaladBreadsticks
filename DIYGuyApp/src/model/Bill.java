@@ -10,11 +10,9 @@ import java.io.Serializable;
  * @author Cynthia Mora Olmedo, Editor: Stephanie Day
  *
  */
-
-public final class Bill implements Serializable {
-
-public final class Bill {
+public final class Bill  implements Serializable{
 	
+	private static final long serialVersionUID = 7675614786195270363L;
 	String billType;
 	int billDay;
 	int billMonth;
@@ -133,16 +131,4 @@ public final class Bill {
 	public final void setBillCost(double billCost) {
 		this.billCost = billCost;
 	}
-	
-
-	public int getTest() {
-		return test;
-	}
-
-	public void setTest(int test) {
-		this.test = test;
-	}
-	
-	
-
 }
