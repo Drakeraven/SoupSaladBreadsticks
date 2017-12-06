@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 public final class Bill implements Serializable {
 
-public final class Bill {
+
 	
 	String billType;
 	int billDay;
