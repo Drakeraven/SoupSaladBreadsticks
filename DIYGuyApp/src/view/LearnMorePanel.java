@@ -1,5 +1,4 @@
 package view;
-
 import javax.swing.JPanel;
 
 public class LearnMorePanel extends JPanel {
@@ -17,5 +16,4 @@ public class LearnMorePanel extends JPanel {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

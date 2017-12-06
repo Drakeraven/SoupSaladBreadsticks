@@ -1,5 +1,4 @@
 package view;
-
 import javax.swing.JPanel;
 
 public class ComparePanel extends JPanel{
@@ -18,5 +17,4 @@ public class ComparePanel extends JPanel{
 		// TODO Auto-generated method stub
 		
 	}
-
 }
