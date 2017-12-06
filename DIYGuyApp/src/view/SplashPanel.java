@@ -23,21 +23,32 @@ import model.FileHandler;
 
 /**
  * GUI Panel displaying the main home page of the DIYGuy App
- * @author Stephanie Day
- * @version 11/27/2017
+ * @author Coder: Stephanie Day
  */
 public class SplashPanel extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 7186465643558755364L;
+	/** Constant for the size of the project/energy tracker buttons **/
 	private static final Dimension BUTTON_SIZE = new Dimension(200,100);
+	
+	/** Constant for program window size **/
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
+	
 	private static JButton importButton;
 	private static JButton exportButton;
 	
+	/** Instance of the class that handles import/exporting the program data. **/
 	public static FileHandler programData;
 	public static JFileChooser fileChooser;
-
+	
+	/**
+	 * Constructor that creates the Splash Page window,
+	 * and validates whether or not the program has an existing user.
+	 * If not, prompts for new user data before displaying the Splash Page.
+	 * Pre-condition: None.
+	 * Post Condition: Initialized and visible Splash Panel.
+	 */
 	public SplashPanel() {
 		
 		setUpGui();
@@ -53,11 +64,14 @@ public class SplashPanel extends JPanel implements Serializable {
 			System.out.println("ERROR: Where's the classes??");
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/** Sets up Splash Page Frame 
+	 *	Pre-Condition: None
+	 *	Post-Condition: Splash Panel for GUI Frame. 
+	 **/
 	private void setUpGui() {
 		this.setSize(WIDTH, HEIGHT);
 		this.setLayout(new GridBagLayout());
@@ -81,6 +95,12 @@ public class SplashPanel extends JPanel implements Serializable {
 	
 	}
 	
+	/** Creates a separate panel for import export buttons
+	 * to allow them to be displayed on multiple pages
+	 * @return JPanel with the import/export buttons.
+	 * Pre-Condition: None.
+	 * Post-Condition: Panel containing functioning import/export buttons.
+	 */
 	public JPanel setupImportExportButtons() {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setAlignmentY(BOTTOM_ALIGNMENT);
@@ -89,10 +109,18 @@ public class SplashPanel extends JPanel implements Serializable {
 		exportButton = new JButton("Export User");
 		buttonPanel.add(exportButton);
 		
-		setUpXmlListeners();
+		setUpfileListeners();
 		return buttonPanel;
 	}
 	
+	/**
+	 * If an existing user wasn't detected, this dialog
+	 * displays first to gather information to generate a new user.
+	 * pre-Condition: Did not find an existing ProgramData.diy
+	 * Post-Condition: User Data to create new ProgramData.diy
+	 * @return The New User Data for the program data file.
+	 
+	 */
 	private UserData newUserDialog() {
 		UserData newUserProgramData;
 		JTextField enteredName = new JTextField(5);
@@ -133,9 +161,14 @@ public class SplashPanel extends JPanel implements Serializable {
 		return newUserProgramData;
 	}
 
-	private void setUpXmlListeners() {
+	/**
+	 * Class to set up the actions needed for the import/export buttons.
+	 * Pre Condition: Inititalized import/export Jbuttons.
+	 * Post-Condition: actions added to existing import/export Jbuttons.
+	 */
+	private void setUpfileListeners() {
 		
-		class xmlListener implements ActionListener {
+		class fileListener implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
@@ -177,7 +210,17 @@ public class SplashPanel extends JPanel implements Serializable {
 			
 		}
 		
-		importButton.addActionListener(new xmlListener());
-		exportButton.addActionListener(new xmlListener());
+		importButton.addActionListener(new fileListener());
+		exportButton.addActionListener(new fileListener());
+	}
+	
+	/**
+	 * A Class to allow other classes to access the file's Program Data.
+	 * Pre-Condition: Initialized FileHandler
+	 * Post-Condition: returns reference to FileHandler.
+	 * @return File Handler which contain's the program's User Data field.
+	 */
+	public FileHandler getFileHandler() {
+		return programData;
 	}
 }

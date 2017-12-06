@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * Bill Object containing relevant Bill information.
- * @author Cynthia Mora Olmedo
+ * @author Cynthia Mora Olmedo, Editor: Stephanie Day
  *
  */
 
