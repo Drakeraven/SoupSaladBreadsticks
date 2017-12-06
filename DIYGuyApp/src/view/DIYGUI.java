@@ -2,11 +2,14 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
+import javax.swing.WindowConstants;
 
 import actions.EnergyTrackerAction;
 import actions.ProjectsAction;
@@ -37,13 +40,12 @@ public class DIYGUI extends JFrame {
     
     /** Main Menu Panel - log in, import,export. */
 	SplashPanel mainMenu;
-	
 	ProjectMenuPanel projectMenu;
 	ComparePanel compare;
 	LearnMorePanel learnMore;
 	BillTrackerMenuPanel billTracker;
 	BillEntryPanel billEntry;
-	
+	//FileHandler handler;
 	/**
 	 * Constructor for the DIY GUI frame.
 	 */
@@ -51,18 +53,30 @@ public class DIYGUI extends JFrame {
 		super("DIY APP");
 	}
 
-	
+	/**
+	 * Sets up the GUI components.
+	 */
 	public void start() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		//handler = new FileHandler();
+		
+		//when window is closing, it overwrites user data.
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+					//FileHandler.createProgramData();
+		            System.exit(0);
+		        }
+		});
 		setSize(FRAME_SIZE);
 		setLocationRelativeTo(null);
-		
 		setupGui();
 		setMinimumSize(FRAME_SIZE);
 		setMaximumSize(FRAME_SIZE);
 		//pack();
 		setVisible(true);
 	}
+	
 	
 	/**
 	 * Sets up all panels 
@@ -75,7 +89,7 @@ public class DIYGUI extends JFrame {
 		billTracker = new BillTrackerMenuPanel() ;
 		billEntry = new BillEntryPanel() ;
 		createToolBar();
-
+		//first visible panel is set
 		myPanel = mainMenu;
 		this.add(myPanel, BorderLayout.CENTER);
 		this.add(( (SplashPanel) myPanel).setupImportExportButtons(), BorderLayout.SOUTH);
@@ -246,11 +260,7 @@ public class DIYGUI extends JFrame {
 	public final void setBillEntry(BillEntryPanel billEntry) {
 		this.billEntry = billEntry;
 	}
-
-	
-
-
-    
+   
 	
 	
 }
