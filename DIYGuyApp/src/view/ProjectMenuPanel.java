@@ -1,13 +1,12 @@
 package view;
 
-import java.awt.Dimension;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
+
+import model.Project;
 
 public class ProjectMenuPanel extends JPanel{
 
@@ -16,20 +15,29 @@ public class ProjectMenuPanel extends JPanel{
 	private static final int WIDTH = 500;
 	private static final int HEIGHT = 500;
 	
-	JLabel titleLbl;
-	JTable projectTbl;
+	
+	private Project[] projects;
+	private JLabel titleLbl;
+	private JTable projectTbl;
 	
 	public ProjectMenuPanel() {
 		titleLbl = new JLabel("PROJECTS");
 		titleLbl.setSize(WIDTH/2, HEIGHT/20);
-
+		populateProjects();
 		setupGUI();
 
+	}
+
+	private void populateProjects() {
+		// TODO I need an updated project class to do this
+		
 	}
 
 	private void setupGUI() {
 		// TODO Auto-generated method stub
 		setSize(WIDTH, HEIGHT);
+		
+		
 		this.add(titleLbl);
 		String[] columnNames = {"",
 				"",
@@ -47,7 +55,8 @@ public class ProjectMenuPanel extends JPanel{
 			     "Pool", new Integer(10), new Boolean(false)}
 			};
 		projectTbl = new JTable(data,columnNames);
-		this.add(projectTbl);
+		JScrollPane jsp = new JScrollPane(projectTbl);
+		this.add(jsp);
 		
 	}
 }
