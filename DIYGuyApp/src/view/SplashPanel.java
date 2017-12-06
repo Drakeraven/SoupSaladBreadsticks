@@ -4,40 +4,57 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Serializable;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.UserData;
-import model.XmlHandler;
+import model.FileHandler;
 
 /**
  * GUI Panel displaying the main home page of the DIYGuy App
  * @author Stephanie Day
  * @version 11/27/2017
  */
-public class SplashPanel extends JPanel {
+public class SplashPanel extends JPanel implements Serializable {
 
 	private static final long serialVersionUID = 7186465643558755364L;
 	private static final Dimension BUTTON_SIZE = new Dimension(200,100);
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
+	private static JButton importButton;
+	private static JButton exportButton;
 	
-	public static XmlHandler programData;
+	public static FileHandler programData;
+	public static JFileChooser fileChooser;
 
 	public SplashPanel() {
 		
 		setUpGui();
+		fileChooser = new JFileChooser();
+
 		try {
-			programData = new XmlHandler();
+			programData = new FileHandler();
 			
 		} catch (FileNotFoundException ex) {
-			programData = new XmlHandler(newUserDialog());
+			programData = new FileHandler(newUserDialog());
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("ERROR: Where's the classes??");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -67,9 +84,12 @@ public class SplashPanel extends JPanel {
 	public JPanel setupImportExportButtons() {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setAlignmentY(BOTTOM_ALIGNMENT);
-		buttonPanel.add(new JButton("Import User"));
-		buttonPanel.add(new JButton("Export User"));
+		importButton = new JButton("Import user");
+		buttonPanel.add(importButton);
+		exportButton = new JButton("Export User");
+		buttonPanel.add(exportButton);
 		
+		setUpXmlListeners();
 		return buttonPanel;
 	}
 	
@@ -78,7 +98,9 @@ public class SplashPanel extends JPanel {
 		JTextField enteredName = new JTextField(5);
 		JTextField enteredEmail = new JTextField(5);
 		
-		JPanel fieldPanel = new JPanel(new GridLayout(6,1));
+		JPanel fieldPanel = new JPanel(new GridLayout(8,1));
+		fieldPanel.add(new JLabel("A New User!"));
+		fieldPanel.add(new JLabel("Enter the info below to get started, or cancel to exit."));
 		fieldPanel.add(new JLabel("Enter a name: "));
 		fieldPanel.add(enteredName);
 		fieldPanel.add(Box.createHorizontalStrut(15));
@@ -92,9 +114,11 @@ public class SplashPanel extends JPanel {
 			if (result == JOptionPane.OK_OPTION) {
 				validEmail = enteredEmail.getText();
 			} else if (result == JOptionPane.CANCEL_OPTION) {
-				return null; //TODO may change how this is done.
+				System.exit(0);
+				
+			} else if (result == JOptionPane.CLOSED_OPTION) {
+				System.exit(0);
 			}
-			//TODO Handle the bug that the program crashes if you exit the user information pane.
 			
 		 while (!validEmail.contains("@")) {
 			JOptionPane.showMessageDialog(null, "Oops! Enter a valid email.");
@@ -109,5 +133,51 @@ public class SplashPanel extends JPanel {
 		return newUserProgramData;
 	}
 
+	private void setUpXmlListeners() {
+		
+		class xmlListener implements ActionListener {
 
+			@Override
+			public void actionPerformed(ActionEvent theEvent) {
+				
+				if (theEvent.getSource() == importButton) {
+					try {
+						fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+						final int selectedFile = fileChooser.showSaveDialog(null);
+						if (selectedFile == JFileChooser.APPROVE_OPTION) {
+							programData.importData(fileChooser.getSelectedFile());
+						}
+					} catch (ClassNotFoundException FileWahWah) {
+		                JOptionPane.showMessageDialog(null,
+		                        "What Happened to your .exe??", 
+		                        "Error!", JOptionPane.ERROR_MESSAGE);
+		                
+					} catch (IOException fileWahWah) {
+						JOptionPane.showMessageDialog(null,
+		                        "Not a valid format. Be sure you've picked a .diy", 
+		                        "Error!", JOptionPane.ERROR_MESSAGE);
+					}
+					
+				} else if (theEvent.getSource() == exportButton) {
+					try {
+						fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+						final int selectedFile = fileChooser.showSaveDialog(null);
+						if (selectedFile == JFileChooser.APPROVE_OPTION) {
+							programData.exportData(fileChooser.getSelectedFile());
+						}
+					} catch(IOException fileWahWah) {
+		                JOptionPane.showMessageDialog(null,
+		                        "Did you somehow select a bad directory?", 
+		                        "Error!", JOptionPane.ERROR_MESSAGE);
+						
+					}
+				}
+				
+			}
+			
+		}
+		
+		importButton.addActionListener(new xmlListener());
+		exportButton.addActionListener(new xmlListener());
+	}
 }

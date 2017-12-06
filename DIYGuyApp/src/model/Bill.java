@@ -3,11 +3,16 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  * Bill Object containing relevant Bill information.
  * @author Cynthia Mora Olmedo
  *
  */
+
+public final class Bill implements Serializable {
+
 public final class Bill {
 	
 	String billType;
@@ -128,6 +133,16 @@ public final class Bill {
 	public final void setBillCost(double billCost) {
 		this.billCost = billCost;
 	}
+	
+
+	public int getTest() {
+		return test;
+	}
+
+	public void setTest(int test) {
+		this.test = test;
+	}
+	
 	
 
 }
