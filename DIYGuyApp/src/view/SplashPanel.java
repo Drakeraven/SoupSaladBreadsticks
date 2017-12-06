@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import actions.ProjectsAction;
 import model.UserData;
 import model.FileHandler;
 
@@ -37,6 +38,8 @@ public class SplashPanel extends JPanel implements Serializable {
 	
 	private static JButton importButton;
 	private static JButton exportButton;
+	public JButton projectButton;
+	public JButton energyButton;
 	
 	/** Instance of the class that handles import/exporting the program data. **/
 	public static FileHandler programData;
@@ -81,12 +84,12 @@ public class SplashPanel extends JPanel implements Serializable {
 		JPanel ButtonHolder = new JPanel(new GridLayout(1,2));
 		((GridLayout)ButtonHolder.getLayout()).setHgap(20);
 		//TODO Create actions for going to the projects and energy tracker windows
-		JButton projectButton = new JButton("Projects");
-		JButton EnergyButton = new JButton("Energy Tracker");
+		projectButton = new JButton("Projects");
+		energyButton = new JButton("Energy Tracker");
 		projectButton.setPreferredSize(BUTTON_SIZE);
-		EnergyButton.setPreferredSize(BUTTON_SIZE);
+		energyButton.setPreferredSize(BUTTON_SIZE);
 		ButtonHolder.add(projectButton);
-		ButtonHolder.add(EnergyButton);
+		ButtonHolder.add(energyButton);
 		constr.fill = GridBagConstraints.BOTH;
 		constr.gridx = 0;
 		constr.gridy = 0;

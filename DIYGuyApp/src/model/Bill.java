@@ -1,6 +1,3 @@
-/**
- * 
- */
 package model;
 
 import java.io.Serializable;
@@ -10,7 +7,7 @@ import java.io.Serializable;
  * @author Cynthia Mora Olmedo, Editor: Stephanie Day
  *
  */
-public final class Bill  implements Serializable{
+public final class Bill  implements Serializable {
 	
 	private static final long serialVersionUID = 7675614786195270363L;
 	String billType;

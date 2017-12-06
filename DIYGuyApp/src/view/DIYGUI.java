@@ -96,6 +96,8 @@ public class DIYGUI extends JFrame {
 		myPanel = mainMenu;
 		this.add(myPanel, BorderLayout.CENTER);
 		this.add(( (SplashPanel) myPanel).setupImportExportButtons(), BorderLayout.SOUTH);
+		mainMenu.projectButton.addActionListener(new ProjectsAction(this));
+		mainMenu.energyButton.addActionListener(new EnergyTrackerAction(this));
 	}
 	
 	/**
