@@ -15,6 +15,10 @@ public final class Bill implements Serializable {
 
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2412987123081026860L;
 	String billType;
 	int billDay;
 	int billMonth;
@@ -132,15 +136,6 @@ public final class Bill implements Serializable {
 	 */
 	public final void setBillCost(double billCost) {
 		this.billCost = billCost;
-	}
-	
-
-	public int getTest() {
-		return test;
-	}
-
-	public void setTest(int test) {
-		this.test = test;
 	}
 	
 	
