@@ -12,6 +12,7 @@ import java.io.Serializable;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,10 +36,12 @@ public class SplashPanel extends JPanel implements Serializable {
 	private static JButton exportButton;
 	
 	public static FileHandler programData;
+	public static JFileChooser fileChooser;
 
 	public SplashPanel() {
 		
 		setUpGui();
+		fileChooser = new JFileChooser();
 
 		try {
 			programData = new FileHandler();
@@ -138,8 +141,12 @@ public class SplashPanel extends JPanel implements Serializable {
 			public void actionPerformed(ActionEvent theEvent) {
 				
 				if (theEvent.getSource() == importButton) {
-					try {programData.importData();
-					
+					try {
+						fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+						final int selectedFile = fileChooser.showSaveDialog(null);
+						if (selectedFile == JFileChooser.APPROVE_OPTION) {
+							programData.importData(fileChooser.getSelectedFile());
+						}
 					} catch (ClassNotFoundException FileWahWah) {
 		                JOptionPane.showMessageDialog(null,
 		                        "What Happened to your .exe??", 
@@ -153,7 +160,11 @@ public class SplashPanel extends JPanel implements Serializable {
 					
 				} else if (theEvent.getSource() == exportButton) {
 					try {
-						programData.exportData();
+						fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+						final int selectedFile = fileChooser.showSaveDialog(null);
+						if (selectedFile == JFileChooser.APPROVE_OPTION) {
+							programData.exportData(fileChooser.getSelectedFile());
+						}
 					} catch(IOException fileWahWah) {
 		                JOptionPane.showMessageDialog(null,
 		                        "Did you somehow select a bad directory?", 

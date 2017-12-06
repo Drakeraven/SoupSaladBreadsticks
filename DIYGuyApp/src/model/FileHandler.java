@@ -17,20 +17,14 @@ public class FileHandler implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 473118590700911358L;
-	private static JFileChooser fileChooser;
 	public UserData myUserData;
 
 	public FileHandler() throws ClassNotFoundException, IOException {
-
-		fileChooser = new JFileChooser();
 		initData();
 	}
 	
 	public FileHandler(UserData newUser) {
-		fileChooser = new JFileChooser();
 		myUserData = newUser;
-		System.out.println("Entered User: " + myUserData.getUserName());
-		System.out.println("Entered User: " + myUserData.getUserEmail());
 		try {
 			createProgramData();
 		} catch (IOException e) {
@@ -39,64 +33,40 @@ public class FileHandler implements Serializable {
 		}
 	}
 	
-	private void createProgramData() throws FileNotFoundException, IOException {
-		FileOutputStream fileOut = new FileOutputStream("data\\ProgramData.diy");
+	public void createProgramData() throws FileNotFoundException, IOException {
+		FileOutputStream fileOut = new FileOutputStream("ProgramData.diy");
 		ObjectOutputStream encoderp = new ObjectOutputStream(fileOut);
-		System.out.println("createProgramData: " + myUserData.getUserName());
-		System.out.println("createProgramData: "+ myUserData.getUserEmail());
 		encoderp.writeObject(myUserData);
 		encoderp.close();
 		fileOut.close();
 		
 	}
 
-	public void exportData() throws FileNotFoundException, IOException {
-		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		final int selectedFile = fileChooser.showOpenDialog(null);
+	public void exportData(File selectedPath) throws FileNotFoundException, IOException {
 		ObjectOutputStream encodere = null;
-		
-		if (selectedFile == JFileChooser.APPROVE_OPTION) {
-			final File selectedPath = fileChooser.getSelectedFile();
-				FileOutputStream fileOut = new FileOutputStream(selectedPath + "\\UserData.diy");
-				encodere = new ObjectOutputStream(fileOut);
-				System.out.println("Writing Data: " + myUserData.getUserName());
-				System.out.println("Writing Data: " + myUserData.getUserEmail());
-				encodere.writeObject(myUserData);
-				encodere.close();
-				fileOut.close();
-		}
-		
+		FileOutputStream fileOut = new FileOutputStream(selectedPath + "\\UserData.diy");
+		encodere = new ObjectOutputStream(fileOut);
+		encodere.writeObject(myUserData);
+		encodere.close();
+		fileOut.close();
 	}
 	
-	public void importData() throws ClassNotFoundException, IOException {
-		fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-		final int selectedFile = fileChooser.showSaveDialog(null);
+	public void importData(File selectedPath) throws ClassNotFoundException, IOException {
 		ObjectInputStream decoderim = null;
-		
-		if (selectedFile == JFileChooser.APPROVE_OPTION) {
-				final File selectedPath = fileChooser.getSelectedFile();
-				FileInputStream fileIn = new FileInputStream(selectedPath);
-				decoderim = new ObjectInputStream(fileIn);
-				myUserData = (UserData)decoderim.readObject();
-				decoderim.close();
-				fileIn.close();
-				System.out.println("importing Data: " + myUserData.getUserEmail());
-				System.out.println("importing Data: " + myUserData.getUserName());
-			
-		}
-		
+		FileInputStream fileIn = new FileInputStream(selectedPath);
+		decoderim = new ObjectInputStream(fileIn);
+		myUserData = (UserData)decoderim.readObject();
+		decoderim.close();
+		fileIn.close();
+		System.out.println(myUserData.getUserEmail());
 	}
 	
 	private void initData() throws IOException, ClassNotFoundException, FileNotFoundException {
-		
-		FileInputStream fileIn = new FileInputStream("data\\ProgramData.diy");
+		FileInputStream fileIn = new FileInputStream("ProgramData.diy");
 		ObjectInputStream decoderi = new ObjectInputStream(fileIn);
 		myUserData = (UserData)decoderi.readObject();
 		decoderi.close();
 		fileIn.close();
-		System.out.println("initializing Data: " + myUserData.getUserName());
-		System.out.println("Initializing Data: " + myUserData.getUserEmail());
-
 	}
 	
 	public UserData getUserData() {
