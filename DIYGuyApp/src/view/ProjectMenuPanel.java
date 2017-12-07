@@ -22,7 +22,7 @@ public class ProjectMenuPanel extends JPanel{
 	private JLabel titleLbl;
 
 	public ProjectMenuPanel() {
-		titleLbl = new JLabel("PROJECTS");
+		titleLbl = new JLabel("PROJECTS??");
 		titleLbl.setSize(WIDTH/2, HEIGHT/20);
 		populateProjects();
 		setupGUI();
@@ -39,9 +39,12 @@ public class ProjectMenuPanel extends JPanel{
 		setSize(WIDTH, HEIGHT);
 		this.setLayout(new BorderLayout());
 		
-		this.add(titleLbl);
+		this.add(titleLbl, BorderLayout.NORTH);
 		JScrollPane jsp = new JScrollPane();
-		this.add(jsp, BorderLayout.NORTH);
+		jsp.add(new JButton("hi"));
+		this.add(jsp, BorderLayout.CENTER);
+		
+		
 		
 	}
 }
