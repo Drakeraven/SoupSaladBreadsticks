@@ -7,23 +7,9 @@ import java.io.Serializable;
  * @author Cynthia Mora Olmedo, Editor: Stephanie Day
  *
  */
-<<<<<<< Upstream, based on origin/master
-public final class Bill  implements Serializable {
-=======
-
 public final class Bill implements Serializable {
-
-
->>>>>>> 1074920 removed duplicate class statement
 	
-<<<<<<< Upstream, based on origin/master
 	private static final long serialVersionUID = 7675614786195270363L;
-=======
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2412987123081026860L;
->>>>>>> 2a811f2 removed unfamiliar test code?
 	String billType;
 	int billDay;
 	int billMonth;
@@ -142,10 +128,4 @@ public final class Bill implements Serializable {
 	public final void setBillCost(double billCost) {
 		this.billCost = billCost;
 	}
-<<<<<<< Upstream, based on origin/master
-=======
-	
-	
-
->>>>>>> 2a811f2 removed unfamiliar test code?
 }
