@@ -2,20 +2,23 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.DisplayMode;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import model.Project;
 
-public class ProjectMenuPanel extends JPanel{
+public class ProjectMenuPanel extends JPanel implements ActionListener{
 
 	/**Default serial number*/
 	private static final long serialVersionUID = 1L;
@@ -25,7 +28,7 @@ public class ProjectMenuPanel extends JPanel{
 	
 	ArrayList<Project> pList;
 	private JLabel titleLbl;
-
+	private OverviewPanel dispPanel;
 	public ProjectMenuPanel() {
 		titleLbl = new JLabel("PROJECTS??");
 		populateProjects();
@@ -44,7 +47,11 @@ public class ProjectMenuPanel extends JPanel{
 		spPanel.setBorder(new EmptyBorder(getInsets()));
 		populateProjectGrid(spPanel);
 		jsp.setViewportView(spPanel);
+		jsp.setMaximumSize(new Dimension(200, 200));
 		this.add(jsp, BorderLayout.CENTER);
+		
+		dispPanel = new OverviewPanel();
+		add(dispPanel, BorderLayout.SOUTH);
 
 	}
 	
@@ -52,14 +59,29 @@ public class ProjectMenuPanel extends JPanel{
 		for(Project p : pList) {
 			JPanel miniProjectPanel = new JPanel(new GridLayout(1, 2));
 			JPanel borderPanel = new JPanel(new BorderLayout());
-			miniProjectPanel.setBackground(Color.BLACK);
-			miniProjectPanel.add(new JLabel(p.getProjectName()));
-			miniProjectPanel.add(new JButton("hi"));
+			JButton btnProj = new JButton(p.getProjectName());
+			
+			btnProj.addActionListener(this);
+			
+			miniProjectPanel.add(btnProj);
 			borderPanel.add(miniProjectPanel, BorderLayout.CENTER);
 			spPanel.add(borderPanel);
 		}
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		JButton buttonPressed = (JButton) e.getSource();
+		String projectString = buttonPressed.getText();
+		for(Project p : pList) {
+			if(p.getProjectName().equals(projectString)) {
+				dispPanel.setProject(p);
+			}
+		}
+		System.out.println(projectString);
+	}
+	
 	private void populateProjects() {
 		pList = new ArrayList<>();
 		//setting up instructions and materials for project 1)
@@ -121,4 +143,6 @@ public class ProjectMenuPanel extends JPanel{
 				pr3M, pr3S, "Electricity", 2.5, 800.00);
 		pList.add(pro3);
 	}
+
+
 }
