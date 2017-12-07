@@ -155,4 +155,99 @@ public final class Project {
 	
 	
 	
+}	/**
+	 * @return the projectName
+	 */
+	public final String getProjectName() {
+		return projectName;
+	}
+
+	/**
+	 * @param projectName the projectName to set
+	 */
+	public final void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	/**
+	 * @return the materials
+	 */
+	public final ArrayList<String> getMaterials() {
+		ArrayList<String> mats = new ArrayList<>();
+		for(String material: materials) {
+			mats.add(material);
+		}
+		return materials;
+	}
+
+	/**
+	 * @param materials the materials to set
+	 */
+	public final void setMaterials(ArrayList<String> materials) {
+		this.materials = materials;
+	}
+
+	/**
+	 * @return the steps
+	 */
+	public final ArrayList<String> getSteps() {
+		ArrayList<String> stps = new ArrayList<>();
+		for(String step: steps) {
+			stps.add(step);
+		}
+		return stps;
+	}
+
+	/**
+	 * @param steps the steps to set
+	 */
+	public final void setSteps(ArrayList<String> steps) {
+		this.steps = steps;
+	}
+
+	/**
+	 * @return the energyType
+	 */
+	public final String getEnergyType() {
+		return energyType;
+	}
+
+	/**
+	 * @param energyType the energyType to set
+	 */
+	public final void setEnergyType(String energyType) {
+		this.energyType = energyType;
+	}
+
+	/**
+	 * @return the estimatedTime
+	 */
+	public final double getEstimatedTime() {
+		return estimatedTime;
+	}
+
+	/**
+	 * @param estimatedTime the estimatedTime to set
+	 */
+	public final void setEstimatedTime(double estimatedTime) {
+		this.estimatedTime = estimatedTime;
+	}
+
+	/**
+	 * @return the totalCost
+	 */
+	public final double getTotalCost() {
+		return totalCost;
+	}
+
+	/**
+	 * @param totalCost the totalCost to set
+	 */
+	public final void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
+	
+	
+	
+	
 }
