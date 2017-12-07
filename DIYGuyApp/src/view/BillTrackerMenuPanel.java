@@ -12,6 +12,9 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -39,9 +42,12 @@ public class BillTrackerMenuPanel extends JPanel {
 	private static final long serialVersionUID = -8232879434427235700L;
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
+	public static  FileHandler handler;
+	public static String[] columnNames = {"Bill Type", "Month", "Day", "Year", "Bill Cost"};
+	private static JButton addBill; 
 
 	public BillTrackerMenuPanel(FileHandler fileCh) { 	
-		FileHandler handler = fileCh;
+		handler = fileCh;
 		buildGUI(); 	
 	}
 	
@@ -51,14 +57,29 @@ public class BillTrackerMenuPanel extends JPanel {
 	 * Post: None
 	 */
 	public void buildGUI() { 
-		//ArrayList<Bill> billList = UserData.getBillList();
+		UserData myUser = handler.myUserData;
+		ArrayList<Bill> billList = myUser.getBillList();
+		
  		this.setSize(WIDTH, HEIGHT);
 		this.setLayout(new BorderLayout());
-		//GridBagConstraints constraint = new GridBagConstraints();
 		
-		//JPanel billInformation = new JPanel(new GridLayout(2,2));
-		//JTable overallTable = new JTable();
-		JButton overallTable = new JButton("Table Placeholder");
+		Object[][] data = get2DArray(billList);
+		
+		Object[][] data2 = {
+			    {"Kathy", "Smith",
+			     "Snowboarding", new Integer(5), new Boolean(false)},
+			    {"John", "Doe",
+			     "Rowing", new Integer(3), new Boolean(true)},
+			    {"Sue", "Black",
+			     "Knitting", new Integer(2), new Boolean(false)},
+			    {"Jane", "White",
+			     "Speed reading", new Integer(20), new Boolean(true)},
+			    {"Joe", "Brown",
+			     "Pool", new Integer(10), new Boolean(false)}
+			};
+
+		JTable overallTable = new JTable(data, columnNames);
+
 		this.add(overallTable, BorderLayout.CENTER);
 		this.add(setUpAddBillButton(), BorderLayout.SOUTH);
 		
@@ -69,19 +90,34 @@ public class BillTrackerMenuPanel extends JPanel {
 		checkBoxes.add(water);
 		this.add(checkBoxes, BorderLayout.EAST);
 		*/
-		
-		//TODO: Implement table lmao
-		
-		/*
-		 * Header needed above the table
-		 * Possible model needed to define the table 
-		 * Haven't actually implemented table
-		 */
-		
-		
-		
+		this.setVisible(true); 
+		revalidate();
+
 	}
 	
+	/*
+	 * Method to get a 2d array from an array of objects
+	 * Pre: Takes in an ArrayList of type Bill
+	 * Post: Returns a 2d array of bill information
+	 */
+	private Object[][] get2DArray(ArrayList<Bill> billList) {
+		int size = billList.size();
+		Object[][] list = new Object[size][5];
+		
+		for (int i = 0; i < size; i++) { 
+			list[i][0] = billList.get(0).getBillType();
+			System.out.println(billList.get(0));
+			System.out.println(billList.get(0).getBillType());
+			list[i][1] = billList.get(1).getBillDay();
+			list[i][2] = billList.get(2).getBillMonth();
+			list[i][3] = billList.get(3).getBillYear();
+			list[i][4] = billList.get(4).getBillCost();
+		}
+		
+		
+		return list;
+	}
+
 	/*
 	 * Method to set up the GUI elements for adding a bill to the current User
 	 * Pre: None
@@ -94,8 +130,16 @@ public class BillTrackerMenuPanel extends JPanel {
 		JButton addBill = new JButton("Add Bill");
 		billComponent.add(addBill);
 		
+		//setUpBillListener(); 
+		addBill.addActionListener(new java.awt.event.ActionListener() {
+	        public void actionPerformed(final java.awt.event.ActionEvent evt) {
+	            BillEntryPanel billEntry = new BillEntryPanel(handler);
+	            billEntry.setUpAddBill();
+	        }
+	    });
+		
 		return billComponent; 
 		
 	}
-	
+
 }

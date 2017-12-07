@@ -24,6 +24,7 @@ public final class Bill  implements Serializable {
 		billDay = day;
 		billMonth = month;
 		billYear = year;
+		billCost = cost;
 	}
 	
 	/**

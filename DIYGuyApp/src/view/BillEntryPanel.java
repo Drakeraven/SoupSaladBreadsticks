@@ -23,9 +23,10 @@ public class BillEntryPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
+	public static FileHandler handler;
 
 	public BillEntryPanel(FileHandler fileHand) { 	
-		FileHandler handler = fileHand;
+		handler = fileHand;
 		setUpAddBill(); 	
 	}	
 	
@@ -35,6 +36,7 @@ public class BillEntryPanel extends JPanel {
 	 * Post: None 
 	 */
 	public JPanel setUpAddBill() { 
+		UserData myUser = handler.getUserData();
 		Bill newBill;
 		double newCost = 0;
 		String newText;
@@ -57,18 +59,12 @@ public class BillEntryPanel extends JPanel {
 		addBill.add(new JLabel("Enter bill date (mm/dd/yyyy): "));
 		addBill.add(Box.createHorizontalStrut(15));
 		JTextField date = new JTextField(); 
-		addBill.add(date);
-		
-		
-		//TODO: Check for valid input
-		//TODO: Check for valid input
-		//TODO: Check for valid input omg cassie don't forget	
-		//TODO: Parse the string, check for valid inputs 
-		 
+		addBill.add(date);		 
 		
 		int result = JOptionPane.showConfirmDialog(this, addBill, 
 				"Enter New Bill Information", JOptionPane.OK_CANCEL_OPTION);
 		if (result == JOptionPane.OK_OPTION) {
+			System.out.println("you've made it to the bill entry");
 			//TODO: Get information here
 			newCost = validateDouble(billCost.getText());
 			
@@ -78,15 +74,13 @@ public class BillEntryPanel extends JPanel {
 			day = validateInt(dateParts[1]);
 			year = validateInt(dateParts[2]);
 			
-			newBill = new Bill(billType.getText(), month, day, year, newCost); 
-		} else if (result == JOptionPane.CANCEL_OPTION) {
-			addBill = null; 
+			newBill = new Bill(billType.getText(), month, day, year, newCost);
+			myUser.setBillList(newBill);
 			
-		} else if (result == JOptionPane.CLOSED_OPTION) {
-			addBill = null; 
 		}
 		
 		while (newCost == -1 || month == -1 || day == -1 || year == -1) { 
+			System.out.println("you've made it to the error code");
 			if (newCost == -1){ 
 				newText = "Please enter a valid cost";
 			} else { 
@@ -105,7 +99,8 @@ public class BillEntryPanel extends JPanel {
 				year = validateInt(dateParts[2]);
 				
 				newBill = new Bill(billType.getText(), month, day, year, newCost); 
-				//UserData.setBillList(newBill); use filehandler to grab data
+				myUser.setBillList(newBill);
+				
 			}
 		}
 		
