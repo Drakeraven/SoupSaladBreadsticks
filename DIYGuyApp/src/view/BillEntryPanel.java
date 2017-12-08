@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JScrollPane;
 
 import model.Bill;
 import model.FileHandler;
@@ -24,9 +25,11 @@ public class BillEntryPanel extends JPanel {
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
 	public static FileHandler handler;
+	public static JScrollPane scrollPane;
 
-	public BillEntryPanel(FileHandler fileHand) { 	
+	public BillEntryPanel(FileHandler fileHand, JScrollPane scroll) { 	
 		handler = fileHand;
+		scrollPane = scroll;
 		setUpAddBill(); 	
 	}	
 	
@@ -74,6 +77,9 @@ public class BillEntryPanel extends JPanel {
 			day = validateInt(dateParts[1]);
 			year = validateInt(dateParts[2]);
 			
+			System.out.println(newCost);
+			System.out.println(dateParts.toString());
+			
 			newBill = new Bill(billType.getText(), month, day, year, newCost);
 			myUser.setBillList(newBill);
 			
@@ -100,12 +106,11 @@ public class BillEntryPanel extends JPanel {
 				
 				newBill = new Bill(billType.getText(), month, day, year, newCost); 
 				myUser.setBillList(newBill);
-				
 			}
 		}
 		
 		//newBill = new Bill(billType.getText(), day, month, year, newCost);
-		
+		//scrollPane.setViewportView();
 		return addBill; 
 	}
 	

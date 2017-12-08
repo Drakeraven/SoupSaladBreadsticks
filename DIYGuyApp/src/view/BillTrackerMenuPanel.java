@@ -24,6 +24,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -45,6 +46,10 @@ public class BillTrackerMenuPanel extends JPanel {
 	public static  FileHandler handler;
 	public static String[] columnNames = {"Bill Type", "Month", "Day", "Year", "Bill Cost"};
 	private static JButton addBill; 
+	private JTable overallTable;
+	private JScrollPane scrollPanel; 
+	private UserData myUser;
+	private ArrayList<Bill> billList;
 
 	public BillTrackerMenuPanel(FileHandler fileCh) { 	
 		handler = fileCh;
@@ -57,8 +62,8 @@ public class BillTrackerMenuPanel extends JPanel {
 	 * Post: None
 	 */
 	public void buildGUI() { 
-		UserData myUser = handler.myUserData;
-		ArrayList<Bill> billList = myUser.getBillList();
+		myUser = handler.myUserData;
+		billList = myUser.getBillList();
 		
  		this.setSize(WIDTH, HEIGHT);
 		this.setLayout(new BorderLayout());
@@ -77,22 +82,15 @@ public class BillTrackerMenuPanel extends JPanel {
 			    {"Joe", "Brown",
 			     "Pool", new Integer(10), new Boolean(false)}
 			};
+		System.out.println("You are Here"); 
+		overallTable = new JTable(data, columnNames);
+		scrollPanel = new JScrollPane(overallTable);
 
-		JTable overallTable = new JTable(data, columnNames);
-
-		this.add(overallTable, BorderLayout.CENTER);
+		this.add(scrollPanel, BorderLayout.CENTER);
 		this.add(setUpAddBillButton(), BorderLayout.SOUTH);
 		
-		/*JPanel checkBoxes = new JPanel(new GridLayout(2,1));
-		JCheckBox elec = new JCheckBox("Electricity");
-		JCheckBox water = new JCheckBox("Water");
-		checkBoxes.add(elec);
-		checkBoxes.add(water);
-		this.add(checkBoxes, BorderLayout.EAST);
-		*/
-		this.setVisible(true); 
+		this.setVisible(true);
 		revalidate();
-
 	}
 	
 	/*
@@ -103,8 +101,8 @@ public class BillTrackerMenuPanel extends JPanel {
 	private Object[][] get2DArray(ArrayList<Bill> billList) {
 		int size = billList.size();
 		Object[][] list = new Object[size][5];
-		
-		for (int i = 0; i < size; i++) { 
+		System.out.println("You are here");
+		for (int i = 0; i < size-1 ; i++) { 
 			list[i][0] = billList.get(0).getBillType();
 			System.out.println(billList.get(0));
 			System.out.println(billList.get(0).getBillType());
@@ -112,9 +110,7 @@ public class BillTrackerMenuPanel extends JPanel {
 			list[i][2] = billList.get(2).getBillMonth();
 			list[i][3] = billList.get(3).getBillYear();
 			list[i][4] = billList.get(4).getBillCost();
-		}
-		
-		
+		}	
 		return list;
 	}
 
@@ -133,13 +129,16 @@ public class BillTrackerMenuPanel extends JPanel {
 		//setUpBillListener(); 
 		addBill.addActionListener(new java.awt.event.ActionListener() {
 	        public void actionPerformed(final java.awt.event.ActionEvent evt) {
-	            BillEntryPanel billEntry = new BillEntryPanel(handler);
-	            billEntry.setUpAddBill();
+	            BillEntryPanel billEntry = new BillEntryPanel(handler, scrollPanel);
+	            Object[][] data = get2DArray(billList);
+	            overallTable = new JTable(data, columnNames);
+	            scrollPanel.setViewportView(overallTable);
 	        }
 	    });
-		
 		return billComponent; 
 		
 	}
+	
+	
 
 }
