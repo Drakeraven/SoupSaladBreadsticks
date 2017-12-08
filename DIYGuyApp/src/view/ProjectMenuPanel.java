@@ -79,13 +79,13 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 				dispPanel.setProject(p);
 			}
 		}
-		System.out.println(projectString);
 	}
 	
 	private void populateProjects() {
 		pList = new ArrayList<>();
 		//setting up instructions and materials for project 1)
 		//materials
+		String s1 = "Lower your energy bill by reducing your water heater temp!";
 		ArrayList<String> pr1M = new ArrayList<>();
 		pr1M.add("Thermometer for testing the water temperature");
 		pr1M.add("Marker to mark the setting on your thermostat");
@@ -96,10 +96,11 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 		pr1S.add("Measure and adjust.Wait a couple of hours, and then measure the water temperature again at the farthest tap from the water heater. Several adjustments may be necessary before you get the temperature you desire.");
 		pr1S.add(" Mark the new temperature.If you are satisfied with the temperature, mark the new temperature on the water heater thermostat with a marker, so that you can make adjustments in the future if necessary.");
 		pr1S.add("Turn down or off when away.If you plan to be away from home for at least 3 days, turn the thermostat down to the lowest setting or completely turn off the water heater. To turn off an electric water heater, switch off the circuit breaker to it. For a gas water heater, make sure you know how to safely relight the pilot light before turning it off.");
-		Project pro1 = new Project("Lower Water Heating Temperature", pr1M, pr1S, "Water", 2.0, 0);
+		Project pro1 = new Project("Reduce Water Heater Temperature", pr1M, pr1S,s1, "Water", 1.0, 0);
 		pList.add(pro1);
 		//setting up instructions and materials for project 2)
 		//materials
+		String s2 = "Use climate control more effeciently by keeping hot/cold air out of your garage";
 		ArrayList<String> pr2M = new ArrayList<>();
 		pr2M.add("Blanket insulation");
 		pr2M.add("Wire fasteners");
@@ -119,11 +120,12 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 		pr2S.add("Fit insulation between joists. Ensure insulation extends to the outside edge of each joist bay and is in contact with blocking or rim/band joist and the subfloor above. When using kraft-faced batts, install kraft facing against the conditioned side of the cavity. The kraft facing creates a vapor retarder that prevents trapped moisture from reducing the insulation's effectiveness.");
 		pr2S.add(" Adjust insulation for a snug fit. Ensure ends of insulation are butted snugly together and in full contact with the subfloor of the conditioned space above.");
 		pr2S.add("Fasten the insulation in place. Use wire fasteners to support the insulation so that it is in full contact with the subfloor but not compressed.");
-		Project pro2 = new Project("Insulate and Air Seal Floors Over Unconditioned Garages", 
-				pr2M, pr2S, "Electricity", 4.5, 500.00);
+		Project pro2 = new Project("Insulate and Air Seal Floors", 
+				pr2M, pr2S, s2, "Electricity", 4.5, 500.00);
 		pList.add(pro2);
 		//setting up instructions and materials for project 3)
 		//materials
+		String s3 = "Keep air from leaking outside by installing Storm Windows.";
 		ArrayList<String> pr3M = new ArrayList<>();
 		pr3M.add("Storm window");
 		pr3M.add("Tape measure");
@@ -139,8 +141,8 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 		pr3S.add("Reposition the storm window into the opening.");
 		pr3S.add("Adjust the expander on the bottom of the storm window.");
 		pr3S.add("Square up the window unit, and then install the remaining installation screws.");
-		Project pro3 = new Project("Install Exterior Storm Windows With Low-E Coating", 
-				pr3M, pr3S, "Electricity", 2.5, 800.00);
+		Project pro3 = new Project("Install Exterior Storm Windows", 
+				pr3M, pr3S, s3, "Electricity", 2.5, 800.00);
 		pList.add(pro3);
 	}
 
