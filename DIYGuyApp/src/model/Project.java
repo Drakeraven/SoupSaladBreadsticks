@@ -15,6 +15,7 @@ public final class Project {
 	String projectName;
 	ArrayList<String> materials;
 	ArrayList<String> steps; //aka directions/instructions
+	String description;
 	String energyType;
 	double estimatedTime; //in hours, 1.3h, 2.75 hr, etc
 	double totalCost;
@@ -29,11 +30,12 @@ public final class Project {
 	 * @param estimatedTime it takes to complete project
 	 * @param totalCost of all materials.
 	 */
-	public Project(String projectName, ArrayList<String> materials, ArrayList<String> steps, 
+	public Project(String projectName, ArrayList<String> materials, ArrayList<String> steps, String description,
 			String energyType, double estimatedTime,double totalCost) {
 		this.projectName = projectName;
 		this.materials = materials;
 		this.steps = steps;
+		this.description = description;
 		this.energyType = energyType;
 		this.estimatedTime = estimatedTime;
 		this.totalCost = totalCost;
@@ -102,6 +104,14 @@ public final class Project {
 		}
 		return stps;
 	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	/**
 	 * @param steps the steps to set
@@ -151,8 +161,6 @@ public final class Project {
 	public final void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}
-	
-	
 	
 	
 }
