@@ -52,17 +52,15 @@ public final class Project {
 	}*/
 	
 	/**
-	 * Compares Project Price
+	 * Compares Project  0 means they are equal;
+	 * positive  means first bill has high cost, negative
+	 * means second bill has higher cost.
 	 * @param a first project being compared
 	 * @param b second project being compared
 	 * @return 0 if a is larger, 1 if b is larger
 	 */
 	public static int compareProjectPrice(Project a, Project b){
-		if (a.getTotalCost() > b.getTotalCost()) {
-			return 1;
-		} else {
-			return 0;
-		}
+		return java.lang.Double.compare(a.getTotalCost(),b.getTotalCost());
 	}
 
 	//Getters and Setters
