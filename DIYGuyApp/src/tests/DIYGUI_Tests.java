@@ -156,7 +156,7 @@ public class DIYGUI_Tests {
 		String[] a = {"11","22","33"};
 		assertArrayEquals(a,BillEntryPanel.validateArray(a));
 		String[] b = {"1","3"} ;
-		String[] c = {"0","0","0"};
+		String[] c = new String[3];
 		assertArrayEquals(c,BillEntryPanel.validateArray(b));
 	}
 
