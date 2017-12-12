@@ -101,7 +101,7 @@ public class DIYGUI_Tests {
 				
 	}
 	/**
-	 * Tests File Handler and implicitly tests UserData
+	 * Tests File Handler and implicitly tests UserData.
 	 */
 	@Test
 	public void testFileHandler() {
@@ -111,7 +111,7 @@ public class DIYGUI_Tests {
 	}
 	
 	/**
-	 * Tests the projectCompare function
+	 * Tests the projectCompare function.
 	 */
 	@Test
 	public void testProjectCompare() {
@@ -121,7 +121,7 @@ public class DIYGUI_Tests {
 	}
 	
 	/**
-	 * Tests the billCompare function
+	 * Tests the billCompare function.
 	 */
 	@Test
 	public void testCompareBillCost() {
@@ -131,7 +131,7 @@ public class DIYGUI_Tests {
 	}
 	
 	/**
-	 * Tests the validateInt static function from BillEntryPanel
+	 * Tests the validateInt static function from BillEntryPanel.
 	 */
 	@Test
 	public void testValidateInt() {
@@ -140,7 +140,7 @@ public class DIYGUI_Tests {
 	}
 	
 	/**
-	 * Tests the validateDouble static function from BillEntryPanel
+	 * Tests the validateDouble static function from BillEntryPanel.
 	 */
 	@Test
 	public void testValidateDouble() {
@@ -149,7 +149,7 @@ public class DIYGUI_Tests {
 	}
 	
 	/**
-	 * Tests the validateArray static function from BillEntryPanel
+	 * Tests the validateArray static function from BillEntryPanel.
 	 */
 	@Test
 	public void testValidateArray() {
