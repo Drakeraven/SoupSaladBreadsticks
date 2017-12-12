@@ -128,6 +128,7 @@ public class DIYGUI extends JFrame {
 		d.add(d.getMyPanel(),BorderLayout.CENTER);
 		d.getMyPanel().repaint();
 		d.repaint();
+		d.revalidate();
 	}
 
 
