@@ -6,7 +6,7 @@ package view;
 import java.awt.EventQueue;
 
 import javax.swing.UIManager;
-import de.javasoft.plaf.synthetica.SyntheticaBlackEyeLookAndFeel;
+//import de.javasoft.plaf.synthetica.SyntheticaBlackEyeLookAndFeel;
 
 /**
  * This program starts the DIY App
@@ -22,7 +22,7 @@ public final class GuiMain {
     private GuiMain() {
         // do nothing
     }
-
+    /*
     /**
      * Set the look and feel for the GUI program.
      */
@@ -38,14 +38,14 @@ public final class GuiMain {
 
         try 
         {
-          UIManager.setLookAndFeel(new SyntheticaBlackEyeLookAndFeel());
+         // UIManager.setLookAndFeel(new SyntheticaBlackEyeLookAndFeel());
         } 
         catch (Exception e) 
         {
           e.printStackTrace();
         }
         
-    }
+    } 
 
     /**
      * Main function that starts App
@@ -55,7 +55,7 @@ public final class GuiMain {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                setLookAndFeel();
+               // setLookAndFeel();
                 new DIYGUI().start();
 
             }
