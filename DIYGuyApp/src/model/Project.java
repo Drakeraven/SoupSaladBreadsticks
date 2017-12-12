@@ -15,6 +15,7 @@ public final class Project {
 	String projectName;
 	ArrayList<String> materials;
 	ArrayList<String> steps; //aka directions/instructions
+	String description;
 	String energyType;
 	double estimatedTime; //in hours, 1.3h, 2.75 hr, etc
 	double totalCost;
@@ -29,11 +30,12 @@ public final class Project {
 	 * @param estimatedTime it takes to complete project
 	 * @param totalCost of all materials.
 	 */
-	public Project(String projectName, ArrayList<String> materials, ArrayList<String> steps, 
+	public Project(String projectName, ArrayList<String> materials, ArrayList<String> steps, String description, 
 			String energyType, double estimatedTime,double totalCost) {
 		this.projectName = projectName;
 		this.materials = materials;
 		this.steps = steps;
+		this.description = description;
 		this.energyType = energyType;
 		this.estimatedTime = estimatedTime;
 		this.totalCost = totalCost;
@@ -55,7 +57,7 @@ public final class Project {
 	 * @param b second project being compared
 	 * @return 0 if a is larger, 1 if b is larger
 	 */
-	public int compareProjectPrice(Project a, Project b){
+	public static int compareProjectPrice(Project a, Project b){
 		return 0;
 	}
 
@@ -108,6 +110,15 @@ public final class Project {
 	 */
 	public final void setSteps(ArrayList<String> steps) {
 		this.steps = steps;
+	}
+	
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**
