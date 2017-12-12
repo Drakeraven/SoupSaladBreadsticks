@@ -36,7 +36,7 @@ public final class Bill implements Serializable {
 	 * @param b second bill
 	 * @return integer indicating which bill has higher cost
 	 */
-	public int compareBillCost(Bill a, Bill b) {
+	public static int compareBillCost(Bill a, Bill b) {
 		if (a.getBillCost() > b.getBillCost()) {
 			return 1;
 		} else {
