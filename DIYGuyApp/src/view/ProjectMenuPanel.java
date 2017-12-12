@@ -23,10 +23,13 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 	private static final int HEIGHT = 200;
 	
 	ArrayList<Project> pList;
+	public static ArrayList<Project> comparisonCart = new ArrayList<>();
+	
 	private JLabel titleLbl;
 	private OverviewPanel dispPanel;
+	private ComparePanel compPanel;
 	public ProjectMenuPanel() {
-
+		compPanel = new ComparePanel(this);
 		titleLbl = new JLabel("PROJECTS");
 		populateProjects();
 		setupGUI();
@@ -47,7 +50,7 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 		jsp.setMaximumSize(new Dimension(200, 200));
 		this.add(jsp, BorderLayout.CENTER);
 		
-		dispPanel = new OverviewPanel();
+		dispPanel = new OverviewPanel(this);
 		add(dispPanel, BorderLayout.SOUTH);
 
 	}
@@ -142,5 +145,16 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 		pList.add(pro3);
 	}
 
+	public static void addComparison(Project project) {
+		comparisonCart.add(project);
+	}
+	
+	public static ArrayList<Project> getComparisonCart() {
+		return comparisonCart;
+	}
+	
+	public ComparePanel getComparePanel() {
+		return compPanel;
+	}
 
 }

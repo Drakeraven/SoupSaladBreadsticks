@@ -3,29 +3,37 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.security.spec.ECField;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 import model.Project;
 
-public class LearnMorePanel extends JPanel {
+public class LearnMorePanel extends JPanel implements ActionListener {
 
 	/**
 	 * @author Bryan
 	 */
 	private static final long serialVersionUID = 1L;
+	ProjectMenuPanel projectPanel;
 	JLabel projectLabel;
 	JTextArea stepsArea;
 	JTextArea materialsArea;
+	JButton addBtn;
 	JScrollPane stepScroll;
 	JScrollPane matScroll;
 	Project project;
-	LearnMorePanel() {
+	LearnMorePanel(ProjectMenuPanel projectPanel) {
+		this.projectPanel = projectPanel;
 		setupGUI();
 	}
 
@@ -40,6 +48,18 @@ public class LearnMorePanel extends JPanel {
 		titlePanel.add(projectLabel);
 		
 		setupTextPanel(titlePanel);
+		
+		addBtn = new JButton("Add To Compare");
+		JPanel buttonPanel = new JPanel(new GridLayout(3, 1));
+		buttonPanel.add(addBtn);
+		
+		JButton compareBtn = new JButton("Go To Comparisons");
+		buttonPanel.add(compareBtn);
+		
+		addBtn.addActionListener(this);
+		compareBtn.addActionListener(this);
+		add(buttonPanel, BorderLayout.SOUTH);
+		
 	}
 
 	private void setupTextPanel(JPanel titlePanel) {
@@ -59,6 +79,8 @@ public class LearnMorePanel extends JPanel {
 		JPanel stepsPanel = new JPanel(new BorderLayout());
 		stepsPanel.add(new JLabel("Steps: "), BorderLayout.NORTH);
 		stepsArea = new JTextArea();
+		stepsArea.setEditable(false);
+		stepsArea.setFocusable(false);
 		stepScroll = new JScrollPane(stepsArea);
 		stepsArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		stepsArea.setLineWrap(true);
@@ -71,6 +93,8 @@ public class LearnMorePanel extends JPanel {
 		JPanel matsPanel = new JPanel(new BorderLayout());
 		matsPanel.add(new JLabel("Materials: "), BorderLayout.NORTH);
 		materialsArea = new JTextArea();
+		materialsArea.setEditable(false);
+		materialsArea.setFocusable(false);
 		matScroll = new JScrollPane(materialsArea);
 		materialsArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		materialsArea.setLineWrap(true);
@@ -104,5 +128,35 @@ public class LearnMorePanel extends JPanel {
 		
 		stepScroll.getVerticalScrollBar().setAutoscrolls(true);
 		matScroll.getVerticalScrollBar().setValue(0);
+		
+		if(ProjectMenuPanel.getComparisonCart().contains(project)) {
+			addBtn.setText("Remove From Compare");
+		} else {
+			addBtn.setText("Add To Compare");
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton btnPressed = (JButton) e.getSource();
+		DIYGUI frame = (DIYGUI)SwingUtilities.getRoot(this);
+		if(btnPressed.getText().equals("Add To Compare")) {
+			if(!ProjectMenuPanel.getComparisonCart().contains(project)) {
+				ProjectMenuPanel.addComparison(project);
+				btnPressed.setText("Remove From Compare");
+			}
+			for (Project p : ProjectMenuPanel.getComparisonCart()) {
+				System.out.println(p.getProjectName() + "\n");
+			}
+		} else if(btnPressed.getText().equals("Remove From Compare")) {
+			if(ProjectMenuPanel.getComparisonCart().contains(project)) {
+				ProjectMenuPanel.getComparisonCart().remove(project);
+				btnPressed.setText("Add To Compare");
+			}
+		} else if(btnPressed.getText().equals("Go To Comparisons")) {
+			System.out.println(projectPanel.toString());
+			projectPanel.getComparePanel().populateArrays();
+			DIYGUI.changeMainPanel(frame, projectPanel.getComparePanel());	
+		}
 	}
 }

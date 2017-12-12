@@ -7,9 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
@@ -22,7 +20,6 @@ public class OverviewPanel extends JPanel implements ActionListener{
 	 */
 	private static final long serialVersionUID = 4411770912151769813L;
 
-	ComparePanel compare;
 	LearnMorePanel learnMore;
 	
 	Project project;
@@ -32,10 +29,10 @@ public class OverviewPanel extends JPanel implements ActionListener{
 	
 	/**
 	 * Default Constructor. Initializes variables and configures the panel.
+	 * @param projectMenuPanel 
 	 */
-	OverviewPanel() {
-		compare = new ComparePanel();
-		learnMore = new LearnMorePanel();
+	OverviewPanel(ProjectMenuPanel projectMenuPanel) {
+		learnMore = new LearnMorePanel(projectMenuPanel);
 		setupPanel();
 	}
 	
@@ -88,9 +85,8 @@ public class OverviewPanel extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		if(descTA.getText().length() != 0) {
 			DIYGUI frame = (DIYGUI)SwingUtilities.getRoot(this);
-			LearnMorePanel lmp = new LearnMorePanel();
-			lmp.setProject(project);
-			DIYGUI.changeMainPanel(frame, lmp);
+			learnMore.setProject(project);
+			DIYGUI.changeMainPanel(frame, learnMore);
 		}
 	}
 }
