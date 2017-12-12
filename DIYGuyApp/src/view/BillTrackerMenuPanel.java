@@ -88,12 +88,7 @@ public class BillTrackerMenuPanel extends JPanel {
 	 */
 	private Object[][] get2DArray(ArrayList<Bill> billList) {
 		int size = billList.size();
-		System.out.println(billList.toString());
-		if (size > 0){ 
-			System.out.println("Hey this is what's inside:" + billList.get(0).getBillType());
-		}
 		Object[][] list = new Object[size][5];
-		System.out.println("get2Darray");
 		for (int i = 0; i < size ; i++) { 
 			list[i][0] = billList.get(i).getBillType();
 			list[i][1] = billList.get(i).getBillDay();
@@ -101,10 +96,6 @@ public class BillTrackerMenuPanel extends JPanel {
 			list[i][3] = billList.get(i).getBillYear();
 			list[i][4] = billList.get(i).getBillCost();
 		}	
-		if (size != 0){ 
-			System.out.println("inside 2d array");
-			System.out.println(list[0][0]);
-		}
 		return list;
 	}
 
@@ -163,7 +154,6 @@ public class BillTrackerMenuPanel extends JPanel {
 		int result = JOptionPane.showConfirmDialog(this, enterBillPanel, 
 				"Enter New Bill Information", JOptionPane.OK_CANCEL_OPTION);
 		if (result == JOptionPane.OK_OPTION) {
-			System.out.println("you've made it to the bill entry");
 			newCost = BillEntryPanel.validateDouble(billCost.getText());
 			
 			String[] dateParts = date.getText().split("/");
@@ -176,7 +166,6 @@ public class BillTrackerMenuPanel extends JPanel {
 		}
 		
 		while (newCost == -1 || month <= 0 || day <= 0 || year <= 0) { 
-			System.out.println("you've made it to the error code");
 			if (newCost == -1){ 
 				newText = "Please enter a valid cost";
 			} else { 
@@ -200,9 +189,7 @@ public class BillTrackerMenuPanel extends JPanel {
 		enterBillPanel.addPropertyChangeListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(final PropertyChangeEvent evt) {
-				System.out.println(evt.getPropertyName());
 				if ("bill".equals(evt.getPropertyName())) {
-					System.out.println("Prop change");
 					data = get2DArray(billList);
 					model.setRowCount(0);
 					int i;
