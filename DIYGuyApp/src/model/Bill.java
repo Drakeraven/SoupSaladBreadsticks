@@ -8,8 +8,11 @@ import java.io.Serializable;
  *
  */
 public final class Bill implements Serializable {
-	
-	private static final long serialVersionUID = 7675614786195270363L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2412987123081026860L;
+
 	String billType;
 	int billDay;
 	int billMonth;
@@ -128,4 +131,6 @@ public final class Bill implements Serializable {
 	public final void setBillCost(double billCost) {
 		this.billCost = billCost;
 	}
+
+
 }
