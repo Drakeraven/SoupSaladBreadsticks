@@ -58,7 +58,11 @@ public final class Project {
 	 * @return 0 if a is larger, 1 if b is larger
 	 */
 	public static int compareProjectPrice(Project a, Project b){
-		return 0;
+		if (a.getTotalCost() > b.getTotalCost()) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 
 	//Getters and Setters
