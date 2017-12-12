@@ -14,6 +14,7 @@ import model.Bill;
 import model.FileHandler;
 import model.Project;
 import model.UserData;
+import view.BillEntryPanel;
 
 /**
  * @author Cynthia Mora Olmedo
@@ -36,7 +37,6 @@ public class DIYGUI_Tests {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		
 		data = new UserData("Cynthia Mora","cyncyn@soupsaladbreadsticks.org");
 		handler = new FileHandler(data);
 		testBill = new Bill("Electricity", 01, 01, 17, 64.55);
@@ -53,7 +53,7 @@ public class DIYGUI_Tests {
 		pr1S.add("Measure and adjust.Wait a couple of hours, and then measure the water temperature again at the farthest tap from the water heater. Several adjustments may be necessary before you get the temperature you desire.");
 		pr1S.add(" Mark the new temperature.If you are satisfied with the temperature, mark the new temperature on the water heater thermostat with a marker, so that you can make adjustments in the future if necessary.");
 		pr1S.add("Turn down or off when away.If you plan to be away from home for at least 3 days, turn the thermostat down to the lowest setting or completely turn off the water heater. To turn off an electric water heater, switch off the circuit breaker to it. For a gas water heater, make sure you know how to safely relight the pilot light before turning it off.");
-		pro1 = new Project("Lower Water Heating Temperature", pr1M, pr1S, "Water", 2.0, 0);
+		pro1 = new Project("Lower Water Heating Temperature", pr1M, pr1S,"desc", "Water", 2.0, 0);
 		
 		//setting up instructions and materials for project 2)
 		//materials
@@ -77,7 +77,7 @@ public class DIYGUI_Tests {
 		pr2S.add(" Adjust insulation for a snug fit. Ensure ends of insulation are butted snugly together and in full contact with the subfloor of the conditioned space above.");
 		pr2S.add("Fasten the insulation in place. Use wire fasteners to support the insulation so that it is in full contact with the subfloor but not compressed.");
 		pro2 = new Project("Insulate and Air Seal Floors Over Unconditioned Garages", 
-				pr2M, pr2S, "Electricity", 4.5, 500.00);
+				pr2M, pr2S, "desc", "Electricity", 4.5, 500.00);
 
 		//setting up instructions and materials for project 3)
 		//materials
@@ -97,7 +97,7 @@ public class DIYGUI_Tests {
 		pr3S.add("Adjust the expander on the bottom of the storm window.");
 		pr3S.add("Square up the window unit, and then install the remaining installation screws.");
 		pro3 = new Project("Install Exterior Storm Windows With Low-E Coating", 
-				pr3M, pr3S, "Electricity", 2.5, 800.00);
+				pr3M, pr3S, "desc", "Electricity", 2.5, 800.00);
 				
 	}
 	/**
@@ -116,8 +116,8 @@ public class DIYGUI_Tests {
 	@Test
 	public void testProjectCompare() {
 		//Costs: Pro1 = 0, Pro2 = 500, Pro3 = 800
-		assertEquals(1,pro3.compareProjectPrice(pro3, pro2));
-		assertEquals(0,pro1.compareProjectPrice(pro1, pro2));
+		assertEquals(1,Project.compareProjectPrice(pro3, pro2));
+		assertEquals(0,Project.compareProjectPrice(pro1, pro2));
 	}
 	
 	/**
@@ -126,8 +126,38 @@ public class DIYGUI_Tests {
 	@Test
 	public void testCompareBillCost() {
 		//Costs: testBill= 64.55 testBill2 = 30.05
-		assertEquals(1,testBill.compareBillCost(testBill, testBill2));
-		assertEquals(0,testBill2.compareBillCost(testBill2, testBill));
+		assertEquals(1,Bill.compareBillCost(testBill, testBill2));
+		assertEquals(0,Bill.compareBillCost(testBill2, testBill));
+	}
+	
+	/**
+	 * Tests the validateInt static function from BillEntryPanel
+	 */
+	@Test
+	public void testValidateInt() {
+		assertEquals(1234,BillEntryPanel.validateInt("1234"));
+		assertEquals(-1,BillEntryPanel.validateInt("s"));
+	}
+	
+	/**
+	 * Tests the validateDouble static function from BillEntryPanel
+	 */
+	@Test
+	public void testValidateDouble() {
+		assertEquals(1234,BillEntryPanel.validateDouble("1234.1234"),0.000001);
+		assertEquals(-1,BillEntryPanel.validateDouble("d"),0.000001);
+	}
+	
+	/**
+	 * Tests the validateArray static function from BillEntryPanel
+	 */
+	@Test
+	public void testValidateArray() {
+		String[] a = {"11","22","33"};
+		assertArrayEquals(a,BillEntryPanel.validateArray(a));
+		String[] b = {"1","3"} ;
+		String[] c = {"0","0","0"};
+		assertArrayEquals(c,BillEntryPanel.validateArray(b));
 	}
 
 }
