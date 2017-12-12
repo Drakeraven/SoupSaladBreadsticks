@@ -30,18 +30,15 @@ public final class Bill implements Serializable {
 	}
 	
 	/**
-	 * Compares Bill costs, 1 means first bill has high cost, 0
+	 * Compares Bill costs, 0 means they are equal;
+	 * positive  means first bill has high cost, negative
 	 * means second bill has higher cost.
 	 * @param a first bill
 	 * @param b second bill
 	 * @return integer indicating which bill has higher cost
 	 */
 	public static int compareBillCost(Bill a, Bill b) {
-		if (a.getBillCost() > b.getBillCost()) {
-			return 1;
-		} else {
-			return 0;
-		}
+		return java.lang.Double.compare(a.getBillCost(),b.getBillCost());
 	}
 
 	/* (non-Javadoc)
