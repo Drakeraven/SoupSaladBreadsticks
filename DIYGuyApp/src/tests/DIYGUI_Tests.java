@@ -100,6 +100,8 @@ public class DIYGUI_Tests {
 				pr3M, pr3S, "desc", "Electricity", 2.5, 800.00);
 				
 	}
+	
+	
 	/**
 	 * Tests File Handler and implicitly tests UserData.
 	 */
@@ -144,7 +146,7 @@ public class DIYGUI_Tests {
 	 */
 	@Test
 	public void testValidateDouble() {
-		assertEquals(1234,BillEntryPanel.validateDouble("1234.1234"),0.000001);
+		assertEquals(1234.1234,BillEntryPanel.validateDouble("1234.1234"),0.000001);
 		assertEquals(-1,BillEntryPanel.validateDouble("d"),0.000001);
 	}
 	
