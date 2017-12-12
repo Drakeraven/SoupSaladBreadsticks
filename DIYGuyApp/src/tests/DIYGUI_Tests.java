@@ -28,7 +28,7 @@ public class DIYGUI_Tests {
 	Project pro3;
 	
 	FileHandler handler;
-	UserData myData;
+	UserData data;
 
 	/**
 	 * Sets up testing projects, bills, and 
@@ -36,8 +36,11 @@ public class DIYGUI_Tests {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		Bill testBill = new Bill("Electricity", 01, 01, 17, 64.55);
-		Bill testBill1 = new Bill("Water", 02, 02, 17, 30.05);
+		
+		data = new UserData("Cynthia Mora","cyncyn@soupsaladbreadsticks.org");
+		handler = new FileHandler(data);
+		testBill = new Bill("Electricity", 01, 01, 17, 64.55);
+		testBill2 = new Bill("Water", 02, 02, 17, 30.05);
 		//setting up instructions and materials for project 1)
 		//materials
 		ArrayList<String> pr1M = new ArrayList<>();
@@ -97,11 +100,34 @@ public class DIYGUI_Tests {
 				pr3M, pr3S, "Electricity", 2.5, 800.00);
 				
 	}
-
+	/**
+	 * Tests File Handler and implicitly tests UserData
+	 */
 	@Test
-	public void test() {
-		int result = 
-		fail("Not yet implemented");
+	public void testFileHandler() {
+		String result = handler.getUserData().getUserName() + 
+				" " + handler.getUserData().getUserEmail();
+		assertEquals(result, "Cynthia Mora cyncyn@soupsaladbreadsticks.org");
+	}
+	
+	/**
+	 * Tests the projectCompare function
+	 */
+	@Test
+	public void testProjectCompare() {
+		//Costs: Pro1 = 0, Pro2 = 500, Pro3 = 800
+		assertEquals(1,pro3.compareProjectPrice(pro3, pro2));
+		assertEquals(0,pro1.compareProjectPrice(pro1, pro2));
+	}
+	
+	/**
+	 * Tests the billCompare function
+	 */
+	@Test
+	public void testCompareBillCost() {
+		//Costs: testBill= 64.55 testBill2 = 30.05
+		assertEquals(1,testBill.compareBillCost(testBill, testBill2));
+		assertEquals(0,testBill2.compareBillCost(testBill2, testBill));
 	}
 
 }
