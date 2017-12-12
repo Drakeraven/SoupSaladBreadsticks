@@ -38,7 +38,16 @@ public final class Bill implements Serializable {
 	 * @return integer indicating which bill has higher cost
 	 */
 	public static int compareBillCost(Bill a, Bill b) {
-		return java.lang.Double.compare(a.getBillCost(),b.getBillCost());
+		int val = java.lang.Double.compare(a.getBillCost(),b.getBillCost());
+		int rtn;
+		if (val == 0) {
+			rtn = 0;
+		} else if (val > 0) {
+			rtn = 1;
+		} else {
+			rtn = -1;
+		}
+		return rtn;
 	}
 
 	/* (non-Javadoc)

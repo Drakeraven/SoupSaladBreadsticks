@@ -40,16 +40,6 @@ public final class Project {
 		this.estimatedTime = estimatedTime;
 		this.totalCost = totalCost;
 	}
-
-	/*/**
-	 * Prints Project info in the following format:
-	 * 
-	 
-	public String toString() {
-		StringBuilder str = new StringBuilder();
-		//str.append("Project: %s\nEstimated Time: %d\t")
-		//return  rtn;
-	}*/
 	
 	/**
 	 * Compares Project  0 means they are equal;
@@ -60,7 +50,17 @@ public final class Project {
 	 * @return 0 if a is larger, 1 if b is larger
 	 */
 	public static int compareProjectPrice(Project a, Project b){
-		return java.lang.Double.compare(a.getTotalCost(),b.getTotalCost());
+		int val = java.lang.Double.compare(a.getTotalCost(),b.getTotalCost());
+		int rtn;
+		if (val == 0) {
+			rtn = 0;
+		} else if (val > 0) {
+			rtn = 1;
+		} else {
+			rtn = -1;
+		}
+		return rtn;
+	}
 	}
 
 	//Getters and Setters
