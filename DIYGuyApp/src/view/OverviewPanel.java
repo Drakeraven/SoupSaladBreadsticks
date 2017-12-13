@@ -24,11 +24,9 @@ public class OverviewPanel extends JPanel implements ActionListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 4411770912151769813L;
-
-	LearnMorePanel learnMore;
 	
 	Project project;
-	
+	ProjectMenuPanel projectPanel;
 	JLabel nameLbl;
 	JTextArea descTA;
 	
@@ -37,7 +35,7 @@ public class OverviewPanel extends JPanel implements ActionListener{
 	 * @param projectMenuPanel 
 	 */
 	OverviewPanel(ProjectMenuPanel projectMenuPanel) {
-		learnMore = new LearnMorePanel(projectMenuPanel);
+		projectPanel = projectMenuPanel;
 		setupPanel();
 	}
 	
@@ -98,8 +96,8 @@ public class OverviewPanel extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		if(descTA.getText().length() != 0) {
 			DIYGUI frame = (DIYGUI)SwingUtilities.getRoot(this);
-			learnMore.setProject(project);
-			DIYGUI.changeMainPanel(frame, learnMore);
+			projectPanel.getLearnMorePanel().setProject(project);
+			DIYGUI.changeMainPanel(frame, projectPanel.getLearnMorePanel());
 		}
 	}
 }

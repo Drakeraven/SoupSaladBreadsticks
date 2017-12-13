@@ -54,19 +54,26 @@ public class LearnMorePanel extends JPanel implements ActionListener {
 		
 		setupTextPanel(titlePanel);
 		
+		
+		JPanel buttonPanel = new JPanel(new GridLayout(4, 1));
+		
+		startButton = new JButton("Start Project");
+		buttonPanel.add(startButton);
+		
 		addBtn = new JButton("Add To Compare");
-		JPanel buttonPanel = new JPanel(new GridLayout(3, 1));
 		buttonPanel.add(addBtn);
 		
 		JButton compareBtn = new JButton("Go To Comparisons");
 		buttonPanel.add(compareBtn);
 		
-		startButton = new JButton("Start Project");
-		buttonPanel.add(startButton);
+		JButton menuButton = new JButton("Return to Project List");
+		buttonPanel.add(menuButton);
 		
+		startButton.addActionListener(this);
 		addBtn.addActionListener(this);
 		compareBtn.addActionListener(this);
-		startButton.addActionListener(this);
+		menuButton.addActionListener(this);
+		
 		add(buttonPanel, BorderLayout.SOUTH);
 		
 	}
@@ -194,7 +201,6 @@ public class LearnMorePanel extends JPanel implements ActionListener {
 				btnPressed.setText("Add To Compare");
 			}
 		} else if(btnPressed.getText().equals("Go To Comparisons")) {
-			System.out.println(projectPanel.toString());
 			projectPanel.getComparePanel().populateArrays();
 			DIYGUI.changeMainPanel(frame, projectPanel.getComparePanel());	
 		} else if(btnPressed.getText().equals("Start Project")) {
@@ -202,18 +208,13 @@ public class LearnMorePanel extends JPanel implements ActionListener {
 				projectPanel.addUserData(project);
 				btnPressed.setText("Project in progress. Stop project?");
 			} 
-			for(String s : projectPanel.getUserData()) {
-				System.out.println("\n" +s);
-			}
 		} else if(btnPressed.getText().equals("Project in progress. Stop project?")) {
 			if(projectPanel.getUserData().contains(project.getProjectName())) {
 				projectPanel.removeUserData(project);
 				btnPressed.setText("Start Project");
 			} 
-			
-			for(String s: projectPanel.getUserData()) {
-				System.out.println("\n" +s);
-			}
+		} else if(btnPressed.getText().equals("Return to Project List")) {
+			DIYGUI.changeMainPanel(frame, projectPanel);
 		}
 	}
 }
