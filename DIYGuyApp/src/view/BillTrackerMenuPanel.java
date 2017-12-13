@@ -8,27 +8,23 @@ package view;
 
 import java.awt.BorderLayout;
 
-import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import model.Bill;
+import model.BillHandler;
 import model.FileHandler;
 import model.UserData;
 
@@ -44,13 +40,16 @@ public class BillTrackerMenuPanel extends JPanel {
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
 	public static  FileHandler handler;
-	public static String[] columnNames = {"Bill Type", "Month", "Day", "Year", "Bill Cost"};
-	private static JButton addBill; 
-	private JTable overallTable;
+	DefaultTableModel model = new DefaultTableModel(new Object[]{"Bill Type", "Month", "Day", "Year", "Bill Cost"}, 0);
+	private JTable overallTable = new JTable(model);
 	private JScrollPane scrollPanel; 
 	private UserData myUser;
 	private ArrayList<Bill> billList;
+	private Object[][] data;
 
+	/*
+	 * Constructor for BillTracker class
+	 */
 	public BillTrackerMenuPanel(FileHandler fileCh) { 	
 		handler = fileCh;
 		buildGUI(); 	
@@ -58,8 +57,8 @@ public class BillTrackerMenuPanel extends JPanel {
 	
 	/*
 	 * Initial set up for the main Bill GUI page
-	 * Pre: None 
-	 * Post: None
+	 * Pre: Assumes an already set up fileHandler, and UserData 
+	 * Post: Displays information to the screen regarding user bills 
 	 */
 	public void buildGUI() { 
 		myUser = handler.myUserData;
@@ -68,29 +67,18 @@ public class BillTrackerMenuPanel extends JPanel {
  		this.setSize(WIDTH, HEIGHT);
 		this.setLayout(new BorderLayout());
 		
-		Object[][] data = get2DArray(billList);
-		
-		Object[][] data2 = {
-			    {"Kathy", "Smith",
-			     "Snowboarding", new Integer(5), new Boolean(false)},
-			    {"John", "Doe",
-			     "Rowing", new Integer(3), new Boolean(true)},
-			    {"Sue", "Black",
-			     "Knitting", new Integer(2), new Boolean(false)},
-			    {"Jane", "White",
-			     "Speed reading", new Integer(20), new Boolean(true)},
-			    {"Joe", "Brown",
-			     "Pool", new Integer(10), new Boolean(false)}
-			};
-		System.out.println("You are Here"); 
-		overallTable = new JTable(data, columnNames);
+		data = get2DArray(billList);
+		int i; 
+		for (i = 0; i<data.length; i++) { 
+			model.addRow(new Object[]{data[i][0], data[i][1], data[i][2], data[i][3], data[i][4]});
+		}
 		scrollPanel = new JScrollPane(overallTable);
-
 		this.add(scrollPanel, BorderLayout.CENTER);
 		this.add(setUpAddBillButton(), BorderLayout.SOUTH);
 		
 		this.setVisible(true);
 		revalidate();
+						
 	}
 	
 	/*
@@ -101,23 +89,20 @@ public class BillTrackerMenuPanel extends JPanel {
 	private Object[][] get2DArray(ArrayList<Bill> billList) {
 		int size = billList.size();
 		Object[][] list = new Object[size][5];
-		System.out.println("You are here");
-		for (int i = 0; i < size-1 ; i++) { 
-			list[i][0] = billList.get(0).getBillType();
-			System.out.println(billList.get(0));
-			System.out.println(billList.get(0).getBillType());
-			list[i][1] = billList.get(1).getBillDay();
-			list[i][2] = billList.get(2).getBillMonth();
-			list[i][3] = billList.get(3).getBillYear();
-			list[i][4] = billList.get(4).getBillCost();
+		for (int i = 0; i < size ; i++) { 
+			list[i][0] = billList.get(i).getBillType();
+			list[i][1] = billList.get(i).getBillDay();
+			list[i][2] = billList.get(i).getBillMonth();
+			list[i][3] = billList.get(i).getBillYear();
+			list[i][4] = billList.get(i).getBillCost();
 		}	
 		return list;
 	}
 
 	/*
 	 * Method to set up the GUI elements for adding a bill to the current User
-	 * Pre: None
-	 * Post: None
+	 * Pre: Assumes an already set up panel, fileHandler, and UserData 
+	 * Post: Calls to set up the add bill panel if the user wants to add a bill
 	 */
 	public JPanel setUpAddBillButton() {
 		JPanel billComponent = new JPanel(); 
@@ -125,20 +110,102 @@ public class BillTrackerMenuPanel extends JPanel {
 		
 		JButton addBill = new JButton("Add Bill");
 		billComponent.add(addBill);
+		addBill.firePropertyChange("bill", false, true);
 		
-		//setUpBillListener(); 
 		addBill.addActionListener(new java.awt.event.ActionListener() {
 	        public void actionPerformed(final java.awt.event.ActionEvent evt) {
-	            BillEntryPanel billEntry = new BillEntryPanel(handler, scrollPanel);
-	            Object[][] data = get2DArray(billList);
-	            overallTable = new JTable(data, columnNames);
-	            scrollPanel.setViewportView(overallTable);
+	            setUpAddBill(); 
 	        }
 	    });
+			
 		return billComponent; 
 		
 	}
 	
-	
+	/*
+	 * Method to set up the pop up "add bill information" panel 
+	 * Pre: Assumes an already set up panel, fileHandler, and UserData 
+	 * Post: Displays a GUI for a table of bills and option to add bills 
+	 */
+	public void setUpAddBill() { 
+		UserData myUser = handler.getUserData();
+		double newCost = 0;
+		String newText;
+		int month = 0;
+		int day = 0;
+		int year = 0;
+		JPanel enterBillPanel = new JPanel(new GridLayout(7,1));
+		
+		enterBillPanel.add(new JLabel("Enter bill type: "));
+		enterBillPanel.add(Box.createHorizontalStrut(15));
+		JTextField billType = new JTextField(5); 
+		enterBillPanel.add(billType);
+		enterBillPanel.add(Box.createHorizontalStrut(15));
+		enterBillPanel.add(new JLabel("Enter bill total: "));
+		enterBillPanel.add(Box.createHorizontalStrut(15));
+		JTextField billCost = new JTextField(); 
+		enterBillPanel.add(billCost);
+		enterBillPanel.add(Box.createHorizontalStrut(15));
+		enterBillPanel.add(new JLabel("Enter bill date (mm/dd/yyyy): "));
+		enterBillPanel.add(Box.createHorizontalStrut(15));
+		JTextField date = new JTextField(); 
+		enterBillPanel.add(date);		 
+		
+		int result = JOptionPane.showConfirmDialog(this, enterBillPanel, 
+				"Enter New Bill Information", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) {
+			newCost = BillEntryPanel.validateDouble(billCost.getText());
+			
+			String[] dateParts = date.getText().split("/");
+			dateParts = BillEntryPanel.validateArray(dateParts);
+			month = BillEntryPanel.validateInt(dateParts[0]); 
+			day = BillEntryPanel.validateInt(dateParts[1]);
+			year = BillEntryPanel.validateInt(dateParts[2]);
+					
+			//BillHandler.addBill(billType.getText(), day, month, year, newCost, myUser);
+		}
+		
+		while (newCost == -1 || month <= 0 || day <= 0 || year <= 0) { 
+			if (newCost == -1){ 
+				newText = "Please enter a valid cost";
+			} else { 
+				newText = "Please enter a valid date";
+			}
+			result = JOptionPane.showConfirmDialog(this, enterBillPanel, 
+					newText, JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_OPTION) {
+				newCost = BillEntryPanel.validateDouble(billCost.getText());
+				
+				String[] dateParts = date.getText().split("/");
+				dateParts = BillEntryPanel.validateArray(dateParts);
+				month = BillEntryPanel.validateInt(dateParts[0]); 
+				day = BillEntryPanel.validateInt(dateParts[1]);
+				year = BillEntryPanel.validateInt(dateParts[2]);
+			}
+		}
+		BillHandler.addBill(billType.getText(), day, month, year, newCost, myUser);
+
+		//Add property change, so that when the data is update then the table on the panel is also updated 
+		enterBillPanel.addPropertyChangeListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(final PropertyChangeEvent evt) {
+				if ("bill".equals(evt.getPropertyName())) {
+					data = get2DArray(billList);
+					model.setRowCount(0);
+					int i;
+					for (i = 0; i<data.length; i++) { 
+						model.addRow(new Object[]{data[i][0], data[i][1], data[i][2], data[i][3], data[i][4]});
+					}
+				}
+				model.fireTableDataChanged();
+				overallTable = new JTable(model);
+				scrollPanel.setViewportView(overallTable);
+				revalidate();	
+			}
+		});
+		
+		enterBillPanel.firePropertyChange("bill", false, true);
+		this.add(enterBillPanel); 
+	}
 
 }
