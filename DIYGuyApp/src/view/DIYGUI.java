@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +15,7 @@ import javax.swing.WindowConstants;
 
 import actions.EnergyTrackerAction;
 import actions.ProjectsAction;
+import model.FileHandler;
 
 /**
  * This is a container for all GUI components
@@ -46,7 +49,7 @@ public class DIYGUI extends JFrame {
 
 	BillTrackerMenuPanel billTracker;
 	BillEntryPanel billEntry;
-	//FileHandler handler;
+	FileHandler handler;
   
 	/**
 	 * Constructor for the DIY GUI frame.
@@ -60,13 +63,25 @@ public class DIYGUI extends JFrame {
 	 */
 	public void start() {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		//handler = new FileHandler();
+		try {
+			handler = new FileHandler();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		//when window is closing, it overwrites user data.
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-					//FileHandler.createProgramData();
+					try {
+						handler.createProgramData();
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 		            System.exit(0);
 		        }
 		});
@@ -89,7 +104,7 @@ public class DIYGUI extends JFrame {
 		projectMenu = new ProjectMenuPanel() ;
 		compare = new ComparePanel() ;
 		learnMore = new LearnMorePanel() ;
-		billTracker = new BillTrackerMenuPanel() ;
+		billTracker = new BillTrackerMenuPanel(handler) ;
 		billEntry = new BillEntryPanel() ;
 		createToolBar();
 		//first visible panel is set
@@ -125,6 +140,13 @@ public class DIYGUI extends JFrame {
 		JPanel old = d.getMyPanel();
 		d.remove(old);
 		d.setMyPanel(panel);
+		if (panel instanceof SplashPanel) {
+			
+			d.add(null, BorderLayout.PAGE_START);
+			
+		} else {
+			d.add(d.getDiyToolbar(),BorderLayout.PAGE_START);
+		}
 		d.add(d.getMyPanel(),BorderLayout.CENTER);
 		d.getMyPanel().repaint();
 		d.repaint();
