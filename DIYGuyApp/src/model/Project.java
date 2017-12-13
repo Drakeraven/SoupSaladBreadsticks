@@ -107,14 +107,6 @@ public final class Project {
 		return stps;
 	}
 	
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	/**
 	 * @param steps the steps to set
 	 */

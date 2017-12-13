@@ -136,17 +136,10 @@ public class DIYGUI extends JFrame {
 		JPanel old = d.getMyPanel();
 		d.remove(old);
 		d.setMyPanel(panel);
-		if (panel instanceof SplashPanel) {
-			
-			d.add(null, BorderLayout.PAGE_START);
-			
-		} else {
-			d.add(d.getDiyToolbar(),BorderLayout.PAGE_START);
-		}
 		d.add(d.getMyPanel(),BorderLayout.CENTER);
 		d.getMyPanel().repaint();
 		d.repaint();
-		d.revalidate();
+		d.revalidate(); //YAY
 	}
 
 
