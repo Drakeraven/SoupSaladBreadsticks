@@ -1,4 +1,3 @@
-
 /*
  * Creator: Cassie Renz 
  * Coder: Cassie Renz
@@ -7,7 +6,6 @@
 package view;
 
 import java.awt.BorderLayout;
-
 import java.awt.GridLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -209,5 +207,4 @@ public class BillTrackerMenuPanel extends JPanel {
 		enterBillPanel.firePropertyChange("bill", false, true);
 		this.add(enterBillPanel); 
 	}
-
 }

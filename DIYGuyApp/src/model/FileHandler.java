@@ -61,7 +61,7 @@ public class FileHandler implements Serializable {
 	/**
 	 * Method called by user to export their user data to specified path/
 	 * Pre-condition: Valid directory path.
-	 * @param selectedPath File detailing direcctory path to place UserData.diy
+	 * @param selectedPath File detailing directory path to place UserData.diy
 	 * @throws FileNotFoundException File Write Issue.
 	 * @throws IOException FIle Write Issue.
 	 */

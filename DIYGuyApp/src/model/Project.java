@@ -30,7 +30,8 @@ public final class Project {
 	 * @param estimatedTime it takes to complete project
 	 * @param totalCost of all materials.
 	 */
-	public Project(String projectName, ArrayList<String> materials, ArrayList<String> steps, String description,
+
+	public Project(String projectName, ArrayList<String> materials, ArrayList<String> steps, String description, 
 			String energyType, double estimatedTime,double totalCost) {
 		this.projectName = projectName;
 		this.materials = materials;
@@ -40,27 +41,28 @@ public final class Project {
 		this.estimatedTime = estimatedTime;
 		this.totalCost = totalCost;
 	}
-
-	/*/**
-	 * Prints Project info in the following format:
-	 * 
-	 
-	public String toString() {
-		StringBuilder str = new StringBuilder();
-		//str.append("Project: %s\nEstimated Time: %d\t")
-		//return  rtn;
-	}*/
 	
 	/**
-	 * Compares Project Price
+	 * Compares Project  0 means they are equal;
+	 * positive  means first bill has high cost, negative
+	 * means second bill has higher cost.
 	 * @param a first project being compared
 	 * @param b second project being compared
 	 * @return 0 if a is larger, 1 if b is larger
 	 */
-	public int compareProjectPrice(Project a, Project b){
-		return 0;
+	public static int compareProjectPrice(Project a, Project b){
+		int val = java.lang.Double.compare(a.getTotalCost(),b.getTotalCost());
+		int rtn;
+		if (val == 0) {
+			rtn = 0;
+		} else if (val > 0) {
+			rtn = 1;
+		} else {
+			rtn = -1;
+		}
+		return rtn;
 	}
-
+	
 	//Getters and Setters
 	/**
 	 * @return the projectName
@@ -118,6 +120,15 @@ public final class Project {
 	 */
 	public final void setSteps(ArrayList<String> steps) {
 		this.steps = steps;
+	}
+	
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**

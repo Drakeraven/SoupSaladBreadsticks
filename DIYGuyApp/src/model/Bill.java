@@ -7,9 +7,12 @@ import java.io.Serializable;
  * @author Cynthia Mora Olmedo, Editor: Stephanie Day
  *
  */
-public final class Bill  implements Serializable {
-	
-	private static final long serialVersionUID = 7675614786195270363L;
+public final class Bill implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2412987123081026860L;
+
 	String billType;
 	int billDay;
 	int billMonth;
@@ -28,18 +31,24 @@ public final class Bill  implements Serializable {
 	}
 	
 	/**
-	 * Compares Bill costs, 1 means first bill has high cost, 0
+	 * Compares Bill costs, 0 means they are equal;
+	 * positive  means first bill has high cost, negative
 	 * means second bill has higher cost.
 	 * @param a first bill
 	 * @param b second bill
 	 * @return integer indicating which bill has higher cost
 	 */
-	public int compareBillCost(Bill a, Bill b) {
-		if (a.getBillCost() > b.getBillCost()) {
-			return 1;
+	public static int compareBillCost(Bill a, Bill b) {
+		int val = java.lang.Double.compare(a.getBillCost(),b.getBillCost());
+		int rtn;
+		if (val == 0) {
+			rtn = 0;
+		} else if (val > 0) {
+			rtn = 1;
 		} else {
-			return 0;
+			rtn = -1;
 		}
+		return rtn;
 	}
 
 	/* (non-Javadoc)
@@ -129,4 +138,6 @@ public final class Bill  implements Serializable {
 	public final void setBillCost(double billCost) {
 		this.billCost = billCost;
 	}
+
+
 }
