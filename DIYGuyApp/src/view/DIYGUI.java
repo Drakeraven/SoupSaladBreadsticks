@@ -86,10 +86,10 @@ public class DIYGUI extends JFrame {
 	private void setupGui() {
 
 		mainMenu = new SplashPanel();
+
 		projectMenu = new ProjectMenuPanel(mainMenu.getFileHandler()) ;
-		//compare = new ComparePanel() ;
-		//learnMore = new LearnMorePanel() ;
-		//billTracker = new BillTrackerMenuPanel(mainMenu.getFileHandler()) ;
+		billTracker = new BillTrackerMenuPanel(mainMenu.getFileHandler()) ;
+
 		//billEntry = new BillEntryPanel(mainMenu.getFileHandler()) ;
 		createToolBar();
 		//first visible panel is set
