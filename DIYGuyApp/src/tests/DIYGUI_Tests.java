@@ -5,6 +5,7 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -104,36 +105,63 @@ public class DIYGUI_Tests {
 	
 	/**
 	 * Tests File Handler and implicitly tests UserData.
+	 * @author Bryan
 	 */
 	@Test
 	public void testFileHandler() {
 		String result = handler.getUserData().getUserName() + 
 				" " + handler.getUserData().getUserEmail();
 		assertEquals(result, "Cynthia Mora cyncyn@soupsaladbreadsticks.org");
+		
+	}
+	/**
+	 * @author Cynthia
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
+	@Test(expected = ClassNotFoundException.class)
+	public void testClassNotFoundExceptionException() throws ClassNotFoundException, IOException {
+	    new FileHandler();
+	}
+	/**
+	 * @author Cynthia
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
+	@Test(expected = IOException.class)
+	public void testIOException() throws ClassNotFoundException, IOException {
+	    new FileHandler();
 	}
 	
 	/**
 	 * Tests the projectCompare function.
+	 * @author Cassie
 	 */
 	@Test
 	public void testProjectCompare() {
 		//Costs: Pro1 = 0, Pro2 = 500, Pro3 = 800
 		assertEquals(1,Project.compareProjectPrice(pro3, pro2));
+		assertEquals(-1,Project.compareProjectPrice(pro1, pro2));
+		pro2.setTotalCost(0);
 		assertEquals(0,Project.compareProjectPrice(pro1, pro2));
 	}
 	
 	/**
 	 * Tests the billCompare function.
+	 * @author Stephanie
 	 */
 	@Test
 	public void testCompareBillCost() {
 		//Costs: testBill= 64.55 testBill2 = 30.05
 		assertEquals(1,Bill.compareBillCost(testBill, testBill2));
+		assertEquals(-1,Bill.compareBillCost(testBill2, testBill));
+		testBill.setBillCost(testBill2.getBillCost());
 		assertEquals(0,Bill.compareBillCost(testBill2, testBill));
 	}
 	
 	/**
 	 * Tests the validateInt static function from BillEntryPanel.
+	 * @author Cynthia
 	 */
 	@Test
 	public void testValidateInt() {
@@ -143,6 +171,7 @@ public class DIYGUI_Tests {
 	
 	/**
 	 * Tests the validateDouble static function from BillEntryPanel.
+	 * @author Cynthia
 	 */
 	@Test
 	public void testValidateDouble() {
@@ -152,6 +181,7 @@ public class DIYGUI_Tests {
 	
 	/**
 	 * Tests the validateArray static function from BillEntryPanel.
+	 * @author Cynthia
 	 */
 	@Test
 	public void testValidateArray() {
