@@ -5,11 +5,17 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import model.Bill;
 import model.FileHandler;
@@ -114,23 +120,52 @@ public class DIYGUI_Tests {
 		assertEquals(result, "Cynthia Mora cyncyn@soupsaladbreadsticks.org");
 		
 	}
+	
+	
+	/**
+	 * Rule used to testing exception.
+	 */
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 	/**
 	 * @author Cynthia
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	@Test(expected = ClassNotFoundException.class)
-	public void testClassNotFoundExceptionException() throws ClassNotFoundException, IOException {
-	    new FileHandler();
+	@Test
+	public void testFileNotFoundExceptionImport() throws ClassNotFoundException, IOException{
+		thrown.expect(FileNotFoundException.class);
+		File fakeFile = new File("fakefile.diy");
+		FileHandler h = new FileHandler(); 
+	    h.importData(fakeFile);
+	}
+	
+	/**
+	 * @author Cynthia
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
+	@Test
+	public void testFileNotFoundExceptionExport() throws ClassNotFoundException, IOException{
+		thrown.expect(FileNotFoundException.class);
+		File fakeFolder = new File("fakefolder");
+		FileHandler h = new FileHandler(); 
+	    h.exportData(fakeFolder);
 	}
 	/**
-	 * @author Cynthia
+	 * Tests import and export with valid files names/ file paths. 
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	@Test(expected = IOException.class)
-	public void testIOException() throws ClassNotFoundException, IOException {
-	    new FileHandler();
+	@Test
+	public void testImportExport() throws ClassNotFoundException, IOException{
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		File file = new File(s);
+		handler.exportData(file);
+		handler.importData(new File(s + "\\UserData.diy"));
+		assertEquals("Cynthia Mora", handler.getUserData().getUserName());
+		
 	}
 	
 	/**
