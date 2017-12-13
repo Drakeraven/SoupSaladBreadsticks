@@ -1,4 +1,3 @@
-
 /*
  * Creator: Cassie Renz 
  * Coder: Cassie Renz
@@ -7,7 +6,6 @@
 package view;
 
 import java.awt.BorderLayout;
-
 import java.awt.GridLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -40,7 +38,7 @@ public class BillTrackerMenuPanel extends JPanel {
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
 	public static  FileHandler handler;
-	DefaultTableModel model = new DefaultTableModel(new Object[]{"Bill Type", "Month", "Day", "Year", "Bill Cost"}, 0);
+	DefaultTableModel model = new DefaultTableModel(new Object[]{"Bill Type", "Day", "Month", "Year", "Bill Cost"}, 0);
 	private JTable overallTable = new JTable(model);
 	private JScrollPane scrollPanel; 
 	private UserData myUser;
@@ -161,11 +159,11 @@ public class BillTrackerMenuPanel extends JPanel {
 			month = BillEntryPanel.validateInt(dateParts[0]); 
 			day = BillEntryPanel.validateInt(dateParts[1]);
 			year = BillEntryPanel.validateInt(dateParts[2]);
-					
-			//BillHandler.addBill(billType.getText(), day, month, year, newCost, myUser);
+		} else { 
+			return; 
 		}
 		
-		while (newCost == -1 || month <= 0 || day <= 0 || year <= 0) { 
+		while (newCost == -1 || month <= 0 || month > 12 || day <= 0 || day > 31|| year <= 0) { 
 			if (newCost == -1){ 
 				newText = "Please enter a valid cost";
 			} else { 
@@ -181,6 +179,8 @@ public class BillTrackerMenuPanel extends JPanel {
 				month = BillEntryPanel.validateInt(dateParts[0]); 
 				day = BillEntryPanel.validateInt(dateParts[1]);
 				year = BillEntryPanel.validateInt(dateParts[2]);
+			} else { 
+				return; 
 			}
 		}
 		BillHandler.addBill(billType.getText(), day, month, year, newCost, myUser);
@@ -207,5 +207,4 @@ public class BillTrackerMenuPanel extends JPanel {
 		enterBillPanel.firePropertyChange("bill", false, true);
 		this.add(enterBillPanel); 
 	}
-
 }

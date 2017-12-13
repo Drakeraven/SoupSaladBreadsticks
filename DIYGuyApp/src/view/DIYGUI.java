@@ -48,7 +48,6 @@ public class DIYGUI extends JFrame {
 	LearnMorePanel learnMore;
 
 	BillTrackerMenuPanel billTracker;
-	BillEntryPanel billEntry;
 	FileHandler handler;
   
 	/**
@@ -101,11 +100,8 @@ public class DIYGUI extends JFrame {
 	private void setupGui() {
 
 		mainMenu = new SplashPanel();
-		projectMenu = new ProjectMenuPanel() ;
-		compare = new ComparePanel() ;
-		learnMore = new LearnMorePanel() ;
-		billTracker = new BillTrackerMenuPanel(handler) ;
-		billEntry = new BillEntryPanel() ;
+		projectMenu = new ProjectMenuPanel(mainMenu.getFileHandler());
+		billTracker = new BillTrackerMenuPanel(mainMenu.getFileHandler());
 		createToolBar();
 		//first visible panel is set
 		myPanel = mainMenu;
@@ -274,20 +270,20 @@ public class DIYGUI extends JFrame {
 	}
 
 
-	/**
-	 * @return the billEntry
-	 */
-	public final BillEntryPanel getBillEntry() {
-		return billEntry;
-	}
-
-
-	/**
-	 * @param billEntry the billEntry to set
-	 */
-	public final void setBillEntry(BillEntryPanel billEntry) {
-		this.billEntry = billEntry;
-	}
+//	/**
+//	 * @return the billEntry
+//	 */
+//	public final BillEntryPanel getBillEntry() {
+//		return billEntry;
+//	}
+//
+//
+//	/**
+//	 * @param billEntry the billEntry to set
+//	 */
+//	public final void setBillEntry(BillEntryPanel billEntry) {
+//		this.billEntry = billEntry;
+//	}
    
 	
 	

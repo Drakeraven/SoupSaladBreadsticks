@@ -30,6 +30,7 @@ public final class Project {
 	 * @param estimatedTime it takes to complete project
 	 * @param totalCost of all materials.
 	 */
+
 	public Project(String projectName, ArrayList<String> materials, ArrayList<String> steps, String description, 
 			String energyType, double estimatedTime,double totalCost) {
 		this.projectName = projectName;
@@ -105,6 +106,14 @@ public final class Project {
 		}
 		return stps;
 	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	/**
 	 * @param steps the steps to set
@@ -163,8 +172,6 @@ public final class Project {
 	public final void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}
-	
-	
 	
 	
 }
