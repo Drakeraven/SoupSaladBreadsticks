@@ -89,7 +89,6 @@ public class FileHandler implements Serializable {
 		myUserData = (UserData)decoderim.readObject();
 		decoderim.close();
 		fileIn.close();
-		System.out.println(myUserData.getUserEmail());
 	}
 	
 	/**
