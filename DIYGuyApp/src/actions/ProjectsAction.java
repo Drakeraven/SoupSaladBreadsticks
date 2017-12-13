@@ -31,7 +31,6 @@ public final class ProjectsAction extends AbstractAction{
 	public void actionPerformed(ActionEvent arg0) {
 		
 		DIYGUI.changeMainPanel(diy, (JPanel) diy.getProjectMenu());
-		System.out.print('h');
 	}
 
 }
