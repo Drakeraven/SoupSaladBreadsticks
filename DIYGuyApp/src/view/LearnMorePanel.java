@@ -112,6 +112,7 @@ public class LearnMorePanel extends JPanel implements ActionListener {
 		stepsArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		stepsArea.setLineWrap(true);
 		stepsArea.setWrapStyleWord(true);
+		stepScroll.getVerticalScrollBar().setValue(0);
 		stepsPanel.add(stepScroll);
 		textPanel.add(stepsPanel, BorderLayout.CENTER);
 	}
@@ -132,8 +133,9 @@ public class LearnMorePanel extends JPanel implements ActionListener {
 		materialsArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		materialsArea.setLineWrap(true);
 		materialsArea.setWrapStyleWord(true);
-		matScroll.getVerticalScrollBar().setValue(0);
+
 		matsPanel.add(matScroll, BorderLayout.CENTER);
+		matScroll.getVerticalScrollBar().setValue(0);
 		textPanel.add(matsPanel);
 	}
 
@@ -151,20 +153,25 @@ public class LearnMorePanel extends JPanel implements ActionListener {
 	private void updateLabels() {
 		projectLabel.setText(project.getProjectName());
 		ArrayList<String> stepList = project.getSteps();
-
 		int count = 0;
-		for(String step : stepList) {
-			count++;
-			stepsArea.append(count + ". " + step + "\n\n");
+		if(!stepsArea.getText().contains(stepList.get(0))) {
+
+			for(String step : stepList) {
+				count++;
+				stepsArea.append(count + ". " + step + "\n\n");
+			}
 		}
+
 		count = 0;
 		ArrayList<String> materialList = project.getMaterials();
-		for(String material : materialList) {
-			count++;
-			materialsArea.append(count + ". " + material + "\n\n");
+		if(!materialsArea.getText().contains(materialList.get(1))) {
+			for(String material : materialList) {
+				count++;
+				materialsArea.append(count + ". " + material + "\n\n");
+			}
 		}
 		
-		stepScroll.getVerticalScrollBar().setAutoscrolls(true);
+		stepScroll.getVerticalScrollBar().setValue(0);
 		matScroll.getVerticalScrollBar().setValue(0);
 		
 		if(projectPanel.getComparisonCart().contains(project)) {
