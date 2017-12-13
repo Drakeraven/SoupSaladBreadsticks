@@ -165,7 +165,7 @@ public class BillTrackerMenuPanel extends JPanel {
 			//BillHandler.addBill(billType.getText(), day, month, year, newCost, myUser);
 		}
 		
-		while (newCost == -1 || month <= 0 || day <= 0 || year <= 0) { 
+		while (newCost == -1 || month <= 0 || month > 12 || day <= 0 || day > 31|| year <= 0) { 
 			if (newCost == -1){ 
 				newText = "Please enter a valid cost";
 			} else { 
