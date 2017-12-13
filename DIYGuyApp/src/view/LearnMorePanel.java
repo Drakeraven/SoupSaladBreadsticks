@@ -184,14 +184,14 @@ public class LearnMorePanel extends JPanel implements ActionListener {
 		}
 		
 		if(projectPanel.getUserData().contains(project.getProjectName())) {
-			System.out.println("true");
+			//System.out.println("true");
 			startButton.setText("Project in progress. Stop project?");
 		} else {
-			System.out.println("false");
+			//System.out.println("false");
 			startButton.setText("Start Project");
 		}
 		for(String s : projectPanel.getUserData()) {
-			System.out.println(s);
+			//System.out.println(s);
 		}
 		revalidate();
 		repaint();
