@@ -40,7 +40,7 @@ public class BillTrackerMenuPanel extends JPanel {
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
 	public static  FileHandler handler;
-	DefaultTableModel model = new DefaultTableModel(new Object[]{"Bill Type", "Month", "Day", "Year", "Bill Cost"}, 0);
+	DefaultTableModel model = new DefaultTableModel(new Object[]{"Bill Type", "Day", "Month", "Year", "Bill Cost"}, 0);
 	private JTable overallTable = new JTable(model);
 	private JScrollPane scrollPanel; 
 	private UserData myUser;
