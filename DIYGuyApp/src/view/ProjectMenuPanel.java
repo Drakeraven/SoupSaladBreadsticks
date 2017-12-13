@@ -42,11 +42,9 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 		this.fileHandler = fileHandler;
 		userData = fileHandler.getUserData();
 		compPanel = new ComparePanel(this);
-		learnMorePanel = new LearnMorePanel(this);
 		titleLbl = new JLabel("PROJECTS");
 		populateProjects();
 		setupGUI();
-
 	}
 	
 	/**
@@ -203,6 +201,11 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 	public void removeUserData(Project project) {
 		// TODO Auto-generated method stub
 		userData.removeProjectFromList(project.getProjectName());
+	}
+
+	public void setLearnMorePanel(LearnMorePanel learnMorePanel) {
+		// TODO Auto-generated method stub
+		this.learnMorePanel = learnMorePanel;
 	}
 
 }

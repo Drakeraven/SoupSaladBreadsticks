@@ -153,6 +153,9 @@ public class LearnMorePanel extends JPanel implements ActionListener {
 	private void updateLabels() {
 		projectLabel.setText(project.getProjectName());
 		ArrayList<String> stepList = project.getSteps();
+		
+		stepsArea.setText("");
+		materialsArea.setText("");
 		int count = 0;
 		if(!stepsArea.getText().contains(stepList.get(0))) {
 
@@ -181,10 +184,17 @@ public class LearnMorePanel extends JPanel implements ActionListener {
 		}
 		
 		if(projectPanel.getUserData().contains(project.getProjectName())) {
+			System.out.println("true");
 			startButton.setText("Project in progress. Stop project?");
 		} else {
+			System.out.println("false");
 			startButton.setText("Start Project");
 		}
+		for(String s : projectPanel.getUserData()) {
+			System.out.println(s);
+		}
+		revalidate();
+		repaint();
 	}
 	
 	/**

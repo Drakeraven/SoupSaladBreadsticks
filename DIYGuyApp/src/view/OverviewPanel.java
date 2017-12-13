@@ -96,6 +96,10 @@ public class OverviewPanel extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		if(descTA.getText().length() != 0) {
 			DIYGUI frame = (DIYGUI)SwingUtilities.getRoot(this);
+			
+			if(projectPanel.getLearnMorePanel() == null) {
+				projectPanel.setLearnMorePanel(new LearnMorePanel(projectPanel));
+			} 
 			projectPanel.getLearnMorePanel().setProject(project);
 			DIYGUI.changeMainPanel(frame, projectPanel.getLearnMorePanel());
 		}

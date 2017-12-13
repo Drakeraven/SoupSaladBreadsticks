@@ -62,7 +62,7 @@ public class DIYGUI extends JFrame {
 	 */
 	public void start() {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		try {
+		/*try {
 			handler = new FileHandler();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -83,7 +83,7 @@ public class DIYGUI extends JFrame {
 					}
 		            System.exit(0);
 		        }
-		});
+		});*/
 		setSize(FRAME_SIZE);
 		setLocationRelativeTo(null);
 		setupGui();
@@ -100,8 +100,10 @@ public class DIYGUI extends JFrame {
 	private void setupGui() {
 
 		mainMenu = new SplashPanel();
-		projectMenu = new ProjectMenuPanel(mainMenu.getFileHandler());
-		billTracker = new BillTrackerMenuPanel(mainMenu.getFileHandler());
+		
+		handler = mainMenu.getFileHandler();
+		projectMenu = new ProjectMenuPanel(handler);
+		billTracker = new BillTrackerMenuPanel(handler);
 		createToolBar();
 		//first visible panel is set
 		myPanel = mainMenu;
@@ -109,6 +111,21 @@ public class DIYGUI extends JFrame {
 		this.add(( (SplashPanel) myPanel).setupImportExportButtons(), BorderLayout.SOUTH);
 		mainMenu.projectButton.addActionListener(new ProjectsAction(this));
 		mainMenu.energyButton.addActionListener(new EnergyTrackerAction(this));
+		
+		//when window is closing, it overwrites user data.
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+					try {
+						handler.createProgramData();
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+		            System.exit(0);
+		        }
+		});
 	}
 	
 	/**
