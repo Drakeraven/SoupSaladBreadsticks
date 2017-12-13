@@ -161,8 +161,8 @@ public class BillTrackerMenuPanel extends JPanel {
 			month = BillEntryPanel.validateInt(dateParts[0]); 
 			day = BillEntryPanel.validateInt(dateParts[1]);
 			year = BillEntryPanel.validateInt(dateParts[2]);
-					
-			//BillHandler.addBill(billType.getText(), day, month, year, newCost, myUser);
+		} else { 
+			return; 
 		}
 		
 		while (newCost == -1 || month <= 0 || month > 12 || day <= 0 || day > 31|| year <= 0) { 
@@ -181,6 +181,8 @@ public class BillTrackerMenuPanel extends JPanel {
 				month = BillEntryPanel.validateInt(dateParts[0]); 
 				day = BillEntryPanel.validateInt(dateParts[1]);
 				year = BillEntryPanel.validateInt(dateParts[2]);
+			} else { 
+				return; 
 			}
 		}
 		BillHandler.addBill(billType.getText(), day, month, year, newCost, myUser);
