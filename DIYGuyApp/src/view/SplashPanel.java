@@ -182,6 +182,8 @@ public class SplashPanel extends JPanel implements Serializable {
 						final int selectedFile = fileChooser.showSaveDialog(null);
 						if (selectedFile == JFileChooser.APPROVE_OPTION) {
 							programData.importData(fileChooser.getSelectedFile());
+							JOptionPane.showMessageDialog(null, "Please restart the program to see changes.", 
+									"Restart", JOptionPane.INFORMATION_MESSAGE);
 						}
 					} catch (ClassNotFoundException FileWahWah) {
 		                JOptionPane.showMessageDialog(null,
