@@ -40,11 +40,11 @@ public class ComparePanel extends JPanel{
 	public void populateArrays() {
 
 		columnNames = new String[]{"Project Name", "Price", "Remove from comparisons?"};
-		projectData = new Object[ProjectMenuPanel.getComparisonCart().size()][3];
+		projectData = new Object[projectPanel.getComparisonCart().size()][3];
 		compareTable = new JTable();
-		System.out.println(ProjectMenuPanel.getComparisonCart().size());
+		System.out.println(projectPanel.getComparisonCart().size());
 		int count = 0;
-		for(Project p : ProjectMenuPanel.getComparisonCart()) {
+		for(Project p : projectPanel.getComparisonCart()) {
 			System.out.println(p.getProjectName());
 			projectData[count][0] = p.getProjectName();
 			projectData[count][1] = p.getTotalCost();
@@ -52,7 +52,7 @@ public class ComparePanel extends JPanel{
 			count++;
 			jsp.revalidate();
 		}
-		DefaultTableModel model = new DefaultTableModel(columnNames, ProjectMenuPanel.getComparisonCart().size());
+		DefaultTableModel model = new DefaultTableModel(columnNames, projectPanel.getComparisonCart().size());
 		model.setDataVector(projectData, columnNames);
 		compareTable.setModel(model);
 		jsp.setViewportView(compareTable);

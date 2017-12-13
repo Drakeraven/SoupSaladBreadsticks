@@ -14,6 +14,11 @@ import javax.swing.SwingUtilities;
 
 import model.Project;
 
+/**
+ * 
+ * @author Bryan
+ *
+ */
 public class OverviewPanel extends JPanel implements ActionListener{
 	/**
 	 * 
@@ -37,7 +42,9 @@ public class OverviewPanel extends JPanel implements ActionListener{
 	}
 	
 	/**
-	 * Sets up the layout of the panel.
+	 * Initializes and configures UI elements on the panel.
+	 * Pre-condition: Panel is void and without form
+	 * Post-condition: Let there be light
 	 */
 	private void setupPanel() {
 		setLayout(new BorderLayout());
@@ -62,7 +69,9 @@ public class OverviewPanel extends JPanel implements ActionListener{
 	}
 
 	/**
-	 * Updates what the labels and textbox displays based the currently selected project.
+	 * Updates UI elements on the panel based on the currently selected project.
+	 * Pre-condition: User sends in a project to be viewed
+	 * Post-condition: UI Elements are modified to diplay project information.
 	 */
 	private void updateLabels() {
 		// TODO Auto-generated method stub
@@ -80,6 +89,10 @@ public class OverviewPanel extends JPanel implements ActionListener{
 		repaint();
 	}
 
+	/**
+	 * Pre-condition: User presses a button to go to the Learn More panel for their selected project
+	 * Post-condition: Learn More panel is displayed, updated with currently selected project information.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

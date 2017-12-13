@@ -13,8 +13,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import model.FileHandler;
 import model.Project;
+import model.UserData;
 
+/**
+ * 
+ * @author Bryan
+ *
+ */
 public class ProjectMenuPanel extends JPanel implements ActionListener{
 
 	/**Default serial number*/
@@ -22,20 +29,29 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 	private static final int WIDTH = 200;
 	private static final int HEIGHT = 200;
 	
+	FileHandler fileHandler;
+	UserData userData;
 	ArrayList<Project> pList;
-	public static ArrayList<Project> comparisonCart = new ArrayList<>();
+	public ArrayList<Project> comparisonCart = new ArrayList<>();
 	
 	private JLabel titleLbl;
 	private OverviewPanel dispPanel;
 	private ComparePanel compPanel;
-	public ProjectMenuPanel() {
+	public ProjectMenuPanel(FileHandler fileHandler) {
+		this.fileHandler = fileHandler;
+		userData = fileHandler.getUserData();
 		compPanel = new ComparePanel(this);
 		titleLbl = new JLabel("PROJECTS");
 		populateProjects();
 		setupGUI();
 
 	}
-
+	
+	/**
+	 * Initializes and configures UI elements on the panel.
+	 * Pre-condition: Panel is void and without form
+	 * Post-condition: Let there be light
+	 */
 	private void setupGUI() {
 		// TODO Auto-generated method stub
 		setSize(WIDTH, HEIGHT);
@@ -55,6 +71,11 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 
 	}
 	
+	/**
+	 * Helper method for setupPanel. 
+	 * Populates the panel that contains the project overview.
+	 * @param spPanel
+	 */
 	private void populateProjectGrid(JPanel spPanel) {
 		for(Project p : pList) {
 			JPanel miniProjectPanel = new JPanel(new GridLayout(1, 2));
@@ -69,6 +90,10 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 		}
 	}
 
+	/**
+	 * Precondition: user has clicked on a project they want to view
+	 * Postcondition: the overview panel updates based on currently selected project information.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -81,6 +106,11 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Precondition: Project list is empty.
+	 * Postcondition: Project List is populated with projects. 
+	 * Project text gathered by Cynthia. Thanks Cynthia!
+	 */
 	private void populateProjects() {
 		pList = new ArrayList<>();
 		//setting up instructions and materials for project 1)
@@ -145,16 +175,29 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 		pList.add(pro3);
 	}
 
-	public static void addComparison(Project project) {
+	public void addUserData(Project project) {
+		userData.setProjectList(project.getProjectName());
+	}
+	
+	public ArrayList<String> getUserData () {
+		return userData.getProjectList();
+	}
+	
+	public void addComparison(Project project) {
 		comparisonCart.add(project);
 	}
 	
-	public static ArrayList<Project> getComparisonCart() {
+	public ArrayList<Project> getComparisonCart() {
 		return comparisonCart;
 	}
 	
 	public ComparePanel getComparePanel() {
 		return compPanel;
+	}
+
+	public void removeUserData(Project project) {
+		// TODO Auto-generated method stub
+		userData.removeProjectFromList(project.getProjectName());
 	}
 
 }
