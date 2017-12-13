@@ -102,5 +102,17 @@ public class UserData implements Serializable {
 	public void setProjectList(String projectName) {
 		projectList.add(projectName);
 	}	
+	
+	/**
+	 * @author Bryan
+	 * Removes a given project name from the list of projects.
+	 * Pre-condition: Project name wished to remove
+	 * post-condition: Project name removed from list of projects.
+	 * @param project project name wished to be removed.
+	 */
+	public void removeProjectFromList(String projectName) {
+		if(projectList.contains(projectName))
+				projectList.remove(projectName);
+	}
 }
 
