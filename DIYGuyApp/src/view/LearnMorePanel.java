@@ -46,9 +46,9 @@ public class LearnMorePanel extends JPanel implements ActionListener {
 		setLayout(new BorderLayout());
 		JPanel titlePanel = new JPanel();
 		projectLabel = new JLabel();
-		projectLabel.setFont(new Font("Papyrus", 0, 20));
+		projectLabel.setFont(new Font("Arial", 0, 16));
 		JLabel plbl = new JLabel("Project Name");
-		plbl.setForeground(Color.GREEN);
+		plbl.setForeground(Color.gray);
 		titlePanel.add(plbl);
 		titlePanel.add(projectLabel);
 		
