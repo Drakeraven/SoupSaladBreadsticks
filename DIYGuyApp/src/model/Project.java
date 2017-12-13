@@ -61,8 +61,7 @@ public final class Project {
 		}
 		return rtn;
 	}
-	}
-
+	
 	//Getters and Setters
 	/**
 	 * @return the projectName
