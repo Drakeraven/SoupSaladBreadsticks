@@ -79,7 +79,7 @@ public class DIYGUI_Tests {
 		//steps
 		ArrayList<String> pr2S = new ArrayList<>();
 		pr2S.add("Double-check your insulation. Before opening the packages, verify that the insulation material is the correct width and R-value.");
-		pr2S.add("Seal air gaps. Before insulating, carefully air seal gaps in the floor between the garage and the conditioned space as well as the garage and the outdoors (rim/band joists, for example). Use caulk for gaps smaller then ¼ inch and foam for gaps ¼ inch to 3 inches. In addition to improving energy efficiency, air sealing also helps keep exhaust fumes and other pollutants out of the conditioned space.");
+		pr2S.add("Seal air gaps. Before insulating, carefully air seal gaps in the floor between the garage and the conditioned space as well as the garage and the outdoors (rim/band joists, for example). Use caulk for gaps smaller then Â¼ inch and foam for gaps Â¼ inch to 3 inches. In addition to improving energy efficiency, air sealing also helps keep exhaust fumes and other pollutants out of the conditioned space.");
 		pr2S.add("Fit insulation between joists. Ensure insulation extends to the outside edge of each joist bay and is in contact with blocking or rim/band joist and the subfloor above. When using kraft-faced batts, install kraft facing against the conditioned side of the cavity. The kraft facing creates a vapor retarder that prevents trapped moisture from reducing the insulation's effectiveness.");
 		pr2S.add(" Adjust insulation for a snug fit. Ensure ends of insulation are butted snugly together and in full contact with the subfloor of the conditioned space above.");
 		pr2S.add("Fasten the insulation in place. Use wire fasteners to support the insulation so that it is in full contact with the subfloor but not compressed.");
@@ -111,7 +111,7 @@ public class DIYGUI_Tests {
 	
 	/**
 	 * Tests File Handler and implicitly tests UserData.
-	 * @author Bryan
+	 * @author Bryan Sands
 	 */
 	@Test
 	public void testFileHandler() {
@@ -128,7 +128,7 @@ public class DIYGUI_Tests {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	/**
-	 * @author Cynthia
+	 * @author Cynthia Mora Olmedo
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
@@ -141,7 +141,7 @@ public class DIYGUI_Tests {
 	}
 	
 	/**
-	 * @author Cynthia
+	 * @author Cynthia Mora Olmedo
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
@@ -170,7 +170,7 @@ public class DIYGUI_Tests {
 	
 	/**
 	 * Tests the projectCompare function.
-	 * @author Cassie
+	 * @author Cassie Renz
 	 */
 	@Test
 	public void testProjectCompare() {
@@ -183,7 +183,7 @@ public class DIYGUI_Tests {
 	
 	/**
 	 * Tests the billCompare function.
-	 * @author Stephanie
+	 * @author Stephanie Day
 	 */
 	@Test
 	public void testCompareBillCost() {
@@ -196,7 +196,7 @@ public class DIYGUI_Tests {
 	
 	/**
 	 * Tests the validateInt static function from BillEntryPanel.
-	 * @author Cynthia
+	 * @author Cynthia Mora Olmedo
 	 */
 	@Test
 	public void testValidateInt() {
@@ -206,7 +206,7 @@ public class DIYGUI_Tests {
 	
 	/**
 	 * Tests the validateDouble static function from BillEntryPanel.
-	 * @author Cynthia
+	 * @author Cynthia Mora Olmedo
 	 */
 	@Test
 	public void testValidateDouble() {
@@ -216,7 +216,7 @@ public class DIYGUI_Tests {
 	
 	/**
 	 * Tests the validateArray static function from BillEntryPanel.
-	 * @author Cynthia
+	 * @author Cynthia Mora Olmedo
 	 */
 	@Test
 	public void testValidateArray() {
