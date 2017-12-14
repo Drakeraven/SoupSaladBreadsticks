@@ -154,6 +154,7 @@ public class DIYGUI_Tests {
 	}
 	/**
 	 * Tests import and export with valid files names/ file paths. 
+	 * @author Cynthia Mora Olmedo 
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
