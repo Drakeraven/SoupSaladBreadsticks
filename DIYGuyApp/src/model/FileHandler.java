@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-
-import javax.swing.JFileChooser;
 /**
  * A class to handle the exporting/importing of program data
  * @author Coder: Stephanie Day

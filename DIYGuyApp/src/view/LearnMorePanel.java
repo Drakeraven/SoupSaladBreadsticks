@@ -191,9 +191,6 @@ public class LearnMorePanel extends JPanel implements ActionListener {
 			//System.out.println("false");
 			startButton.setText("Start Project");
 		}
-		for(String s : projectPanel.getUserData()) {
-			//System.out.println(s);
-		}
 		revalidate();
 		repaint();
 	}

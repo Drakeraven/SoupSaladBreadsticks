@@ -18,7 +18,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import actions.ProjectsAction;
 import model.UserData;
 import model.FileHandler;
 

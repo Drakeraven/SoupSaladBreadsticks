@@ -2,8 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -11,8 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
-import javax.swing.WindowConstants;
-
 import actions.EnergyTrackerAction;
 import actions.ProjectsAction;
 import model.FileHandler;
@@ -62,28 +58,6 @@ public class DIYGUI extends JFrame {
 	 */
 	public void start() {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		/*try {
-			handler = new FileHandler();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		//when window is closing, it overwrites user data.
-		this.addWindowListener(new java.awt.event.WindowAdapter() {
-			@Override
-		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-					try {
-						handler.createProgramData();
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-		            System.exit(0);
-		        }
-		});*/
 		setSize(FRAME_SIZE);
 		setLocationRelativeTo(null);
 		setupGui();
@@ -277,24 +251,5 @@ public class DIYGUI extends JFrame {
 	 */
 	public final void setBillTracker(BillTrackerMenuPanel billTracker) {
 		this.billTracker = billTracker;
-	}
-
-
-//	/**
-//	 * @return the billEntry
-//	 */
-//	public final BillEntryPanel getBillEntry() {
-//		return billEntry;
-//	}
-//
-//
-//	/**
-//	 * @param billEntry the billEntry to set
-//	 */
-//	public final void setBillEntry(BillEntryPanel billEntry) {
-//		this.billEntry = billEntry;
-//	}
-   
-	
-	
+	}	
 }
