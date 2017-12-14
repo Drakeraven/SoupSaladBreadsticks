@@ -20,6 +20,7 @@ import model.Project;
 public class LearnMorePanel extends JPanel implements ActionListener {
 
 	/**
+	 * A panel that displays each piece of information on a selected Project item.
 	 * @author Bryan
 	 */
 	private static final long serialVersionUID = 1L;

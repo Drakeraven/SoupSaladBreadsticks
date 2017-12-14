@@ -15,8 +15,8 @@ import javax.swing.SwingUtilities;
 import model.Project;
 
 /**
- * 
- * @author Bryan
+ * This panel displays the the name and description of the currently selected project.
+ * @author Bryan Sands
  *
  */
 public class OverviewPanel extends JPanel implements ActionListener{
@@ -93,8 +93,7 @@ public class OverviewPanel extends JPanel implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(descTA.getText().length() != 0) {
+		if(project != null) {
 			DIYGUI frame = (DIYGUI)SwingUtilities.getRoot(this);
 			
 			if(projectPanel.getLearnMorePanel() == null) {

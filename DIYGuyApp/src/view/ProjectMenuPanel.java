@@ -18,8 +18,8 @@ import model.Project;
 import model.UserData;
 
 /**
- * 
- * @author Bryan
+ * The main Project Panel. Displays all selectable projects, and an overview of the currently selected project.
+ * @author Bryan Sands
  *
  */
 public class ProjectMenuPanel extends JPanel implements ActionListener{
@@ -175,34 +175,66 @@ public class ProjectMenuPanel extends JPanel implements ActionListener{
 		pList.add(pro3);
 	}
 
+	/**
+	 * Precondition: User has indicated that they wish to start a project by clicking "start project" in relation to a project they are viewing
+	 * Postcondition: Project name gets added to an ArrayList handled by UserData
+	 * @param project
+	 */
 	public void addUserData(Project project) {
 		userData.setProjectList(project.getProjectName());
 	}
 	
+	/**
+	 * Returns an ArrayList of currently worked on projects from UserData
+	 * @return ArrayList of in-progress projects
+	 */
 	public ArrayList<String> getUserData () {
 		return userData.getProjectList();
 	}
 	
+	/**
+	 * Pre-condition: A user has indicated that they want to compare a project by clicking "add to projects"
+	 * Post-condition: The project is added to an ArrayList for comparison
+	 * @param project the project to be added to the compare list
+	 */
 	public void addComparison(Project project) {
 		comparisonCart.add(project);
 	}
 	
+	/**
+	 * Returns an ArrayList of all projects to be compared 
+	 * @return ArrayList of 
+	 */
 	public ArrayList<Project> getComparisonCart() {
 		return comparisonCart;
 	}
-	
+	/**
+	 * Returns the Compare panel - this is so that the GUI can return to that panel if the user wants to 
+	 * @return ProjectMenuPanel's instance of ComparePanel
+	 */
 	public ComparePanel getComparePanel() {
 		return compPanel;
 	}
-
+	/**
+	 * Returns the LearnMore panel - this is so that the GUI can return to that panel if the user wants to 
+	 * @return ProjectMenuPanel's instance of LearnMorePanel
+	 */
 	public LearnMorePanel getLearnMorePanel() {
 		return learnMorePanel;
 	}
+	/**
+	 * Precondition: user has decided they no longer want to work on a project and clicked "removed project"
+	 * Postconditon: the name of the project is removed from the ArrayList in UserData
+	 * @param project the project the user wishes to remove
+	 */
 	public void removeUserData(Project project) {
 		// TODO Auto-generated method stub
 		userData.removeProjectFromList(project.getProjectName());
 	}
-
+	/**
+	 * Sets the instance of LearnMorePanel
+	 * @param learnMorePanel the LearnMorePanel to be set
+	 */
 	public void setLearnMorePanel(LearnMorePanel learnMorePanel) {
 		// TODO Auto-generated method stub
 		this.learnMorePanel = learnMorePanel;
